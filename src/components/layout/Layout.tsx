@@ -1,0 +1,19 @@
+import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
+
+/**
+ * Layout component that wraps all pages.
+ * Uses React Router's Outlet to render child routes.
+ */
+function Layout() {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default Layout;

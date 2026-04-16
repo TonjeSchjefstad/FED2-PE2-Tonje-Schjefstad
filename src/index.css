@@ -4,11 +4,12 @@
 @theme {
   --color-bg-primary: #f7f7f5;
   --color-bg-secondary: #efedea;
+  --color-bg-footer: #2a2a2a;
   --color-bg-card: #ffffff;
   --color-bg-muted: #efd7d0;
 
   --color-text-primary: #3d3d3d;
-  --color-text-secondary: #6b6b6b;
+  --color-text-secondary: #f4f4f4;
   --color-text-disabled: #a89a96;
 
   --color-brand-primary: #a97467;
@@ -31,8 +32,6 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
