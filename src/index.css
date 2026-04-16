@@ -1,5 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baumans&family=Inter:wght@400;600;700&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #f7f7f5;
+  --color-bg-secondary: #efedea;
+  --color-bg-card: #ffffff;
+  --color-bg-muted: #efd7d0;
+
+  --color-text-primary: #3d3d3d;
+  --color-text-secondary: #6b6b6b;
+  --color-text-disabled: #a89a96;
+
+  --color-brand-primary: #a97467;
+
+  --color-button-primary: #a97467;
+  --color-button-hover: #8f5f53;
+  --color-button-active: #7a4e44;
+  --color-button-disabled: #d8c6c1;
+  --color-button-focus: #6fa3b8;
+
+  --color-border: #e0ded9;
+
+  --color-info: #afc6d9;
+  --color-success: #b8d8c0;
+  --color-warning: #e6c7a3;
+  --color-error: #d8a7a7;
+
+  --font-logo: "Baumans", sans-serif;
+}
 
 * {
   box-sizing: border-box;
