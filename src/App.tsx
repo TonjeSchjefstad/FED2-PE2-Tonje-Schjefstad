@@ -21,8 +21,8 @@ function App() {
           <Route path="/create-venue" element={<CreateVenue />} />
           <Route path="/edit-venue/:id" element={<EditVenue />} />
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
