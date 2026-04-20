@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/logo.png";
 
@@ -11,6 +12,7 @@ import logo from "../../assets/logo.png";
  */
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <>
@@ -62,12 +64,37 @@ function Header() {
 
           {/* Desktop auth buttons */}
           <div className="hidden md:flex items-center gap-4 text-sm">
-            <button className="text-text-primary font-semibold hover:text-brand-primary transition-colors cursor-pointer">
-              Register
-            </button>
-            <button className="bg-button-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer">
-              Login
-            </button>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  to="/profile"
+                  className="text-text-primary font-semibold hover:text-brand-primary transition-colors"
+                >
+                  My Profile
+                </Link>
+                <button
+                  onClick={logout}
+                  className="border border-button-primary text-button-primary px-5 py-2 rounded-lg font-semibold hover:bg-bg-secondary transition-colors cursor-pointer"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/register"
+                  className="text-text-primary font-semibold hover:text-brand-primary transition-colors cursor-pointer"
+                >
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className="bg-button-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer"
+                >
+                  Sign In
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -150,13 +177,44 @@ function Header() {
           </NavLink>
         </nav>
 
-        <div className="flex flex-col px-6 gap-4">
-          <button className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer">
-            Login
-          </button>
-          <button className="w-full border border-button-primary text-button-primary py-3 rounded-lg font-semibold hover:bg-bg-secondary transition-colors cursor-pointer">
-            Register
-          </button>
+        <div className="flex flex-col px-6 gap-4 mt-4">
+          {isLoggedIn ? (
+            <>
+              <Link
+                to="/profile"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors text-center"
+              >
+                My Profile
+              </Link>
+              <button
+                onClick={() => {
+                  logout();
+                  setIsMenuOpen(false);
+                }}
+                className="w-full border border-button-primary text-button-primary py-3 rounded-lg font-semibold hover:bg-bg-secondary transition-colors cursor-pointer"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors text-center"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/register"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full border border-button-primary text-button-primary py-3 rounded-lg font-semibold hover:bg-bg-secondary transition-colors text-center"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </>
