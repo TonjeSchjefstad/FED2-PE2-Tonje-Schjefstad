@@ -7,6 +7,7 @@ import bgHero from "../assets/bg-hero.webp";
 import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
 import { loginUser } from "../services/api";
 import { useAuth } from "../hooks/useAuth";
+import Button from "../components/ui/Button";
 
 /**
  * Login page for signing in to an existing account.
@@ -43,7 +44,7 @@ function Login() {
 
   return (
     <div
-      className="min-h-[65vh] md:min-h-[75vh] bg-cover bg-center flex items-center justify-center px-4"
+      className="min-h-[65vh] md:min-h-[80vh] bg-cover bg-center flex items-center justify-center px-4 md:-mt-22.5"
       style={{ backgroundImage: `url(${bgHero})` }}
     >
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 md:px-16 py-16 w-full max-w-lg shadow-lg">
@@ -116,13 +117,9 @@ function Login() {
           </div>
 
           {/* Submit button*/}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer mt-2 disabled:bg-button-disabled disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? "Signing in..." : "Sign In"}
-          </button>
+          <Button type="submit" size="lg" isLoading={isSubmitting}>
+            Sign In
+          </Button>
         </form>
 
         <p className="text-sm text-text-muted text-center mt-4">
