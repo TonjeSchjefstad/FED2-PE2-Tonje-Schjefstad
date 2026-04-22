@@ -9,6 +9,7 @@ import EditVenue from "./pages/EditVenue";
 import EditProfile from "./pages/EditProfile";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/edit-venue/:id" element={<EditVenue />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
