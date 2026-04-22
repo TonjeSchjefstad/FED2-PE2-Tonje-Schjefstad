@@ -10,6 +10,7 @@ import { registerUser, loginUser } from "../services/api";
 import { useAuth } from "../hooks/useAuth";
 import { Eye, EyeOff } from "lucide-react";
 import bgHero from "../assets/bg-hero.webp";
+import Button from "../components/ui/Button";
 
 /**
  * Register page for creating a new Customer or Venue Manager account.
@@ -59,7 +60,7 @@ function Register() {
 
   return (
     <div
-      className="min-h-[70vh] md:min-h-[80vh] bg-cover bg-center flex items-center justify-center px-4"
+      className="min-h-[70vh] md:min-h-[80vh] bg-cover bg-center flex items-center justify-center px-4 md:-mt-22.5"
       style={{ backgroundImage: `url(${bgHero})` }}
     >
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 md:px-16 py-16 w-full max-w-lg shadow-lg">
@@ -199,13 +200,10 @@ function Register() {
             )}
           </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer mt-2 disabled:bg-button-disabled disabled:cursor-not-allowed"
-          >
-            {isSubmitting ? "Registering..." : "Register"}
-          </button>
+          {/* Submit button*/}
+          <Button type="submit" size="lg" isLoading={isSubmitting}>
+            Create Account
+          </Button>
         </form>
 
         <p className="text-sm text-text-muted text-center mt-4">

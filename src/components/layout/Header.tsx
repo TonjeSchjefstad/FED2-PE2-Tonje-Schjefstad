@@ -3,6 +3,8 @@ import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/logo.png";
+import ButtonLink from "../ui/ButtonLink";
+import Button from "../ui/Button";
 
 /**
  * Header component displayed at the top of every page.
@@ -12,12 +14,12 @@ import logo from "../../assets/logo.png";
  */
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, user, logout } = useAuth();
 
   return (
     <>
-      <header className="sticky top-0 z-30 backdrop-blur-md bg-bg-primary/70 border-b border-border md:border-none">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="sticky top-0 z-30 md:px-6 md:py-3 border-b border-border md:border-none">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between bg-bg-primary md:bg-bg-primary/70 md:backdrop-blur-md md:rounded-full md:border md:border-border md:px-6 md:py-3">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="Holidaze logo" className="w-8 h-7" />
@@ -72,27 +74,18 @@ function Header() {
                 >
                   My Profile
                 </Link>
-                <button
-                  onClick={logout}
-                  className="border border-button-primary text-button-primary px-5 py-2 rounded-lg font-semibold hover:bg-bg-secondary transition-colors cursor-pointer"
-                >
+                <Button variant="outline" size="md" onClick={logout}>
                   Logout
-                </button>
+                </Button>
               </>
             ) : (
               <>
-                <Link
-                  to="/register"
-                  className="text-text-primary font-semibold hover:text-brand-primary transition-colors cursor-pointer"
-                >
+                <ButtonLink to="/register" variant="outline" size="md">
                   Register
-                </Link>
-                <Link
-                  to="/login"
-                  className="bg-button-primary text-white px-5 py-2 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer"
-                >
+                </ButtonLink>
+                <ButtonLink to="/login" variant="primary" size="md">
                   Sign In
-                </Link>
+                </ButtonLink>
               </>
             )}
           </div>
@@ -141,6 +134,27 @@ function Header() {
             <X size={24} />
           </button>
         </div>
+        {/* Logged in - Welcome message */}
+        {isLoggedIn && user && (
+          <div className="px-6 py-6 border-b border-border ">
+            <h2 className="text-xl font-bold text-text-primary">
+              Welcome {user.name}
+            </h2>
+            <p className="text-text-muted text-sm mt-1">
+              Ready to book your next adventure?
+            </p>
+            <div className="mt-6">
+              <ButtonLink
+                to="/profile"
+                variant="outline"
+                size="md"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                My Profile
+              </ButtonLink>
+            </div>
+          </div>
+        )}
 
         <nav className="flex flex-col px-6 py-2">
           <NavLink
@@ -180,39 +194,35 @@ function Header() {
         <div className="flex flex-col px-6 gap-4 mt-4">
           {isLoggedIn ? (
             <>
-              <Link
-                to="/profile"
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors text-center"
-              >
-                My Profile
-              </Link>
-              <button
+              <Button
+                variant="primary"
+                size="lg"
                 onClick={() => {
                   logout();
                   setIsMenuOpen(false);
                 }}
-                className="w-full border border-button-primary text-button-primary py-3 rounded-lg font-semibold hover:bg-bg-secondary transition-colors cursor-pointer"
               >
-                Logout
-              </button>
+                {" "}
+                Logout{" "}
+              </Button>
             </>
           ) : (
             <>
-              <Link
+              <ButtonLink
                 to="/login"
+                size="lg"
                 onClick={() => setIsMenuOpen(false)}
-                className="w-full bg-button-primary text-white py-3 rounded-lg font-semibold hover:bg-button-hover transition-colors text-center"
               >
                 Sign In
-              </Link>
-              <Link
+              </ButtonLink>
+              <ButtonLink
                 to="/register"
+                variant="outline"
+                size="lg"
                 onClick={() => setIsMenuOpen(false)}
-                className="w-full border border-button-primary text-button-primary py-3 rounded-lg font-semibold hover:bg-bg-secondary transition-colors text-center"
               >
                 Register
-              </Link>
+              </ButtonLink>
             </>
           )}
         </div>

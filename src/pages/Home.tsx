@@ -9,7 +9,7 @@ function Home() {
     <div>
       {/* Hero section */}
       <section
-        className="relative w-full h-150 bg-cover bg-center flex flex-col items-center justify-center text-center px-6"
+        className="relative w-full h-150 md:h-180 bg-cover bg-center flex flex-col items-center justify-center text-center px-6 md:-mt-22.5"
         style={{ backgroundImage: `url(${bgHero})` }}
       >
         {/* Dark overlay */}
