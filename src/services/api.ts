@@ -47,3 +47,21 @@ export async function loginUser(data: { email: string; password: string }) {
 
   return json.data;
 }
+
+/**
+ * Fetches all venues from the API. Returns an array of venues on success.
+ * Throws an error if the request fails.
+ */
+export async function getVenues() {
+  const response = await fetch(
+    `${API_BASE_URL}/holidaze/venues?limit=100&sort=rating&sortOrder=desc`
+  );
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to fetch venues");
+  }
+
+  return json.data;
+}
