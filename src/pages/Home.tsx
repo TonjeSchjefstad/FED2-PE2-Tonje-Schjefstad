@@ -1,10 +1,34 @@
+import { useState, useEffect } from "react";
+import { getVenues } from "../services/api";
+import type { Venue } from "../types/venue";
+import VenueCard from "../components/venue/VenueCard";
+import LoadingSpinner from "../components/ui/LoadingSpinner";
 import bgHero from "../assets/bg-hero.webp";
 import chooseUs from "../assets/choose-us.webp";
-
+import ButtonLink from "../components/ui/ButtonLink";
 /**
  * Homepage with hero section, highly rated venues section, and why choose us section.
+ * Fetches venues from API and displays them in a grid. Shows loading spinner while fetching.
  */
 function Home() {
+  const [venues, setVenues] = useState<Venue[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchVenues() {
+      try {
+        const data = await getVenues();
+        setVenues(data.slice(0, 4));
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchVenues();
+  }, []);
+
   return (
     <div>
       {/* Hero section */}
@@ -53,7 +77,20 @@ function Home() {
           you can count on.
         </p>
 
-        {/* Venue grid will be added here */}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {venues.map((venue) => (
+                <VenueCard key={venue.id} venue={venue} />
+              ))}
+            </div>
+            <div className="flex justify-end mt-6">
+              <ButtonLink to="/venues">View All Venues</ButtonLink>
+            </div>
+          </>
+        )}
       </section>
 
       {/* Why Choose Us section */}
