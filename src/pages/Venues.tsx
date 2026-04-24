@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import VenueCard from "../components/venue/VenueCard";
-import { getVenues } from "../services/api";
+import { getVenues, searchVenues } from "../services/api";
 import type { Venue } from "../types/venue";
 import Pagination from "../components/ui/Pagination";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import SearchBar from "../components/venue/SearchBar";
 
+{
+  /*Venues displayed per page */
+}
 const VENUES_PER_PAGE = 12;
 
 /**
  * Venues page displaying a grid of all available venues.
  * Fetches venue data from the API and handles loading, error, and empty states.
+ * Includes a search bar that allows users to search for venues by destination, which updates the URL query parameters and triggers a new API fetch.
  * Implements pagination to show a limited number of venues per page.
  * Each venue is displayed using the VenueCard component.
  */
@@ -18,11 +24,19 @@ function Venues() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
+
+  const handleSearch = (searchQuery: string) => {
+    setSearchParams(searchQuery ? { q: searchQuery } : {});
+  };
 
   useEffect(() => {
     async function fetchVenues() {
       try {
-        const data = await getVenues();
+        setIsLoading(true);
+        setCurrentPage(1);
+        const data = query ? await searchVenues(query) : await getVenues();
         setVenues(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");
@@ -32,7 +46,7 @@ function Venues() {
     }
 
     fetchVenues();
-  }, []);
+  }, [query]);
 
   const totalPages = Math.ceil(venues.length / VENUES_PER_PAGE);
   const paginatedVenues = venues.slice(
@@ -66,8 +80,11 @@ function Venues() {
         Find your perfect venue
       </h1>
 
+      {/* Search bar */}
+      <SearchBar initialQuery={query} onSearch={handleSearch} />
+
       {/* Venue grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {paginatedVenues.map((venue) => (
           <VenueCard key={venue.id} venue={venue} />
         ))}

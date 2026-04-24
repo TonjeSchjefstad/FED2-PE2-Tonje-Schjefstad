@@ -65,3 +65,20 @@ export async function getVenues() {
 
   return json.data;
 }
+
+/**
+ * Searches for venues by name or description.
+ */
+export async function searchVenues(query: string) {
+  const response = await fetch(
+    `${API_BASE_URL}/holidaze/venues/search?q=${encodeURIComponent(query)}`
+  );
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Search failed");
+  }
+
+  return json.data;
+}
