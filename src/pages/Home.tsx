@@ -6,9 +6,12 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import bgHero from "../assets/bg-hero.webp";
 import chooseUs from "../assets/choose-us.webp";
 import ButtonLink from "../components/ui/ButtonLink";
+import SearchBar from "../components/venue/SearchBar";
 /**
  * Homepage with hero section, highly rated venues section, and why choose us section.
  * Fetches venues from API and displays them in a grid. Shows loading spinner while fetching.
+ * Includes a search bar that navigates to the venues page with the search query.
+ * Shows a loading spinner while fetching venues.
  */
 function Home() {
   const [venues, setVenues] = useState<Venue[]>([]);
@@ -33,14 +36,14 @@ function Home() {
     <div>
       {/* Hero section */}
       <section
-        className="relative w-full h-150 md:h-180 bg-cover bg-center flex flex-col items-center justify-center text-center px-6 md:-mt-22.5"
+        className="relative w-full h-120 md:h-180 bg-cover bg-center flex flex-col items-center justify-center text-center px-6 md:-mt-22.5"
         style={{ backgroundImage: `url(${bgHero})` }}
       >
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/5" />
 
         {/* Content */}
-        <div className="relative z-10 max-w-4xl">
+        <div className="relative z-10 max-w-4xl mb-">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg pb-6">
             Find Your Perfect Stay, Anywhere
           </h1>
@@ -50,23 +53,16 @@ function Home() {
             or a long-term getaway, Holidaze makes it easy to book the stay that
             feels just right.
           </p>
-
-          {/* Search bar placeholder */}
-          <div className="bg-white rounded-xl p-4 flex flex-col md:flex-row gap-4">
-            <input
-              type="text"
-              placeholder="Where are you going?"
-              className="flex-1 px-4 py-2 rounded-lg border border-border text-text-primary outline-none"
-            />
-            <button className="bg-button-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-button-hover transition-colors cursor-pointer">
-              Search Venues →
-            </button>
-          </div>
         </div>
       </section>
 
+      {/* Search bar */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 -mt-18 md:-mt-54">
+        <SearchBar />
+      </div>
+
       {/* Highly Rated Hideaways section */}
-      <section className="max-w-6xl mx-auto px-6 py-16">
+      <section className="max-w-6xl mx-auto  px-6 pt-20 md:pt-48 pb-16">
         <h2 className="text-2xl md:text-4xl font-bold text-text-primary mb-2">
           Highly Rated Hideaways
         </h2>
