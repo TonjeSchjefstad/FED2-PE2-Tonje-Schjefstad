@@ -82,3 +82,21 @@ export async function searchVenues(query: string) {
 
   return json.data;
 }
+
+/**
+ * Fetches a single venue by ID from the API.
+ * Returns venue data including owner and bookings.
+ */
+export async function getVenue(id: string) {
+  const response = await fetch(
+    `${API_BASE_URL}/holidaze/venues/${id}?_owner=true&_bookings=true`
+  );
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to fetch venue");
+  }
+
+  return json.data;
+}
