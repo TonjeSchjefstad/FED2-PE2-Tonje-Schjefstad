@@ -1,4 +1,5 @@
 import type { Media } from "./media";
+import type { Booking } from "./booking";
 
 export interface VenueMeta {
   wifi: boolean;
@@ -17,6 +18,13 @@ export interface VenueLocation {
   lng: number;
 }
 
+export interface VenueOwner {
+  name: string;
+  email: string;
+  avatar: Media;
+  banner: Media;
+}
+
 export interface Venue {
   id: string;
   name: string;
@@ -29,4 +37,6 @@ export interface Venue {
   updated: string;
   meta: VenueMeta;
   location: VenueLocation;
+  owner?: VenueOwner;
+  bookings?: Booking[];
 }
