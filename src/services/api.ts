@@ -49,6 +49,28 @@ export async function loginUser(data: { email: string; password: string }) {
 }
 
 /**
+ * Creates a new API key for the authenticated user.
+ */
+export async function createApiKey(token: string) {
+  const response = await fetch(`${API_BASE_URL}/auth/create-api-key`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name: "Holidaze API Key" }),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to create API key");
+  }
+
+  return json.data.key;
+}
+
+/**
  * Fetches all venues from the API. Returns an array of venues on success.
  * Throws an error if the request fails.
  */
@@ -96,6 +118,34 @@ export async function getVenue(id: string) {
 
   if (!response.ok) {
     throw new Error(json.errors?.[0]?.message || "Failed to fetch venue");
+  }
+
+  return json.data;
+}
+
+/**
+ * Creates a new booking for a venue.
+ * Requires authentication token.
+ */
+export async function createBooking(
+  data: { dateFrom: string; dateTo: string; guests: number; venueId: string },
+  token: string,
+  apiKey: string
+) {
+  const response = await fetch(`${API_BASE_URL}/holidaze/bookings`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Booking failed");
   }
 
   return json.data;

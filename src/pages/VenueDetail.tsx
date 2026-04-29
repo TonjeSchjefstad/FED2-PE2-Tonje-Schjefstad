@@ -7,11 +7,13 @@ import LoadingSpinner from "../components/ui/LoadingSpinner";
 import Breadcrumbs from "../components/ui/Breadcrumbs";
 import ImageCarousel from "../components/venue/ImageCarousel";
 import mapPlaceholder from "../assets/map-placeholder.webp";
+import BookingCard from "../components/venue/BookingCard";
 
 /**
  * VenueDetail page displaying full information about a single venue.
  * Fetches venue data including owner and bookings from the API.
- * Shows image carousel, description, amenities, booking card placeholder, map placeholder and host info.
+ * Shows image carousel, description, amenities, booking card, map placeholder and host info.
+ * Uses BookingCard component to manage booking interactions.
  */
 function VenueDetail() {
   const { id } = useParams<{ id: string }>();
@@ -126,17 +128,13 @@ function VenueDetail() {
           </div>
         </div>
 
-        {/* Booking card placeholder */}
-        <div className="lg:w-80">
-          <div className="bg-bg-card rounded-xl p-6 border border-border">
-            <h2 className="text-xl font-bold text-text-primary mb-4">
-              Check availability
-            </h2>
-            <p className="text-text-muted text-sm">
-              Component will be added here
-            </p>
-          </div>
-        </div>
+        {/* Booking card */}
+        <BookingCard
+          venueId={venue.id}
+          price={venue.price}
+          maxGuests={venue.maxGuests}
+          bookings={venue.bookings || []}
+        />
       </div>
 
       {/* Map placeholder */}
