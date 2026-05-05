@@ -150,3 +150,27 @@ export async function createBooking(
 
   return json.data;
 }
+
+/**
+ * Fetches profile data for a given username. Requires authentication token and API key.
+ * Returns profile data including avatar, banner, and counts of venues and bookings.
+ */
+export async function getProfile(name: string, token: string, apiKey: string) {
+  const response = await fetch(
+    `${API_BASE_URL}/holidaze/profiles/${name}?_venues=true&_bookings=true`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": apiKey,
+      },
+    }
+  );
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to fetch profile");
+  }
+
+  return json.data;
+}
