@@ -174,3 +174,37 @@ export async function getProfile(name: string, token: string, apiKey: string) {
 
   return json.data;
 }
+
+/**
+ * Updates a user profile.
+ * Requires authentication token and API key.
+ */
+export async function updateProfile(
+  name: string,
+  data: {
+    bio?: string;
+    avatar?: { url: string; alt: string };
+    banner?: { url: string; alt: string };
+    venueManager?: boolean;
+  },
+  token: string,
+  apiKey: string
+) {
+  const response = await fetch(`${API_BASE_URL}/holidaze/profiles/${name}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to update profile");
+  }
+
+  return json.data;
+}
