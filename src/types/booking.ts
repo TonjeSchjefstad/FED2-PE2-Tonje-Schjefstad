@@ -1,3 +1,5 @@
+import type { Venue } from "./venue";
+
 export interface Booking {
   id: string;
   dateFrom: string;
@@ -5,4 +7,5 @@ export interface Booking {
   guests: number;
   created: string;
   updated: string;
+  venue?: Venue;
 }
