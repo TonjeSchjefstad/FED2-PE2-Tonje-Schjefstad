@@ -208,3 +208,22 @@ export async function updateProfile(
 
   return json.data;
 }
+
+/**
+ * Deletes a booking by ID.
+ * Requires authentication token and API key.
+ */
+export async function deleteBooking(id: string, token: string, apiKey: string) {
+  const response = await fetch(`${API_BASE_URL}/holidaze/bookings/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+  });
+
+  if (!response.ok) {
+    const json = await response.json();
+    throw new Error(json.errors?.[0]?.message || "Failed to delete booking");
+  }
+}
