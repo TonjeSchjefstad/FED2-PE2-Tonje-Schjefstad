@@ -227,3 +227,50 @@ export async function deleteBooking(id: string, token: string, apiKey: string) {
     throw new Error(json.errors?.[0]?.message || "Failed to delete booking");
   }
 }
+
+/**
+ * Creates a new venue.
+ * Requires authentication token and API key.
+ */
+export async function createVenue(
+  data: {
+    name: string;
+    description: string;
+    price: number;
+    maxGuests: number;
+    rating?: number;
+    meta: {
+      wifi: boolean;
+      parking: boolean;
+      breakfast: boolean;
+      pets: boolean;
+    };
+    location: {
+      country?: string;
+      address?: string;
+      city?: string;
+      zip?: string;
+    };
+    media?: { url: string; alt: string }[];
+  },
+  token: string,
+  apiKey: string
+) {
+  const response = await fetch(`${API_BASE_URL}/holidaze/venues`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to create venue");
+  }
+
+  return json.data;
+}
