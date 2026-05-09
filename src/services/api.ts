@@ -274,3 +274,70 @@ export async function createVenue(
 
   return json.data;
 }
+
+/**
+ * Updates an existing venue by ID.
+ * Requires authentication token and API key.
+ */
+export async function updateVenue(
+  id: string,
+  data: {
+    name: string;
+    description: string;
+    price: number;
+    maxGuests: number;
+    rating?: number;
+    meta: {
+      wifi: boolean;
+      parking: boolean;
+      breakfast: boolean;
+      pets: boolean;
+    };
+    location: {
+      country?: string;
+      address?: string;
+      city?: string;
+      zip?: string;
+    };
+    media?: { url: string; alt: string }[];
+  },
+  token: string,
+  apiKey: string
+) {
+  const response = await fetch(`${API_BASE_URL}/holidaze/venues/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+
+  const json = await response.json();
+
+  if (!response.ok) {
+    throw new Error(json.errors?.[0]?.message || "Failed to update venue");
+  }
+
+  return json.data;
+}
+
+/**
+ * Deletes a venue by ID.
+ * Requires authentication token and API key.
+ */
+export async function deleteVenue(id: string, token: string, apiKey: string) {
+  const response = await fetch(`${API_BASE_URL}/holidaze/venues/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "X-Noroff-API-Key": apiKey,
+    },
+  });
+
+  if (!response.ok) {
+    const json = await response.json();
+    throw new Error(json.errors?.[0]?.message || "Failed to delete venue");
+  }
+}
