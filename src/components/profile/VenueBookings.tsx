@@ -1,0 +1,112 @@
+import { useEffect, useState } from "react";
+import { getVenue } from "../../services/api";
+import type { Booking } from "../../types/booking";
+import LoadingSpinner from "../ui/LoadingSpinner";
+import { ArrowLeft } from "lucide-react";
+
+interface VenueBookingsProps {
+  venueId: string;
+  venueName: string;
+  onBack: () => void;
+}
+
+/**
+ * VenueBookings component displays all bookings for a specific venue.
+ * Shows upcoming bookings with guest name, dates and number of guests.
+ * Displayed inside the My Venues tab on the Profile page.
+ */
+function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchBookings() {
+      try {
+        const data = await getVenue(venueId);
+        setBookings(data.bookings ?? []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchBookings();
+  }, [venueId]);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcoming = bookings.filter((b) => new Date(b.dateTo) >= today);
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("nb-NO", {
+      day: "2-digit",
+      month: "short",
+    });
+  };
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (error) {
+    return <p className="text-error text-sm">{error}</p>;
+  }
+
+  return (
+    <div>
+      <h3 className="font-bold text-text-primary text-lg mb-6">
+        Bookings for {venueName}
+      </h3>
+
+      {/* Upcoming bookings */}
+      <h4 className="font-semibold text-text-primary mb-3">
+        Upcoming Bookings
+      </h4>
+      {upcoming.length === 0 ? (
+        <p className="text-text-muted text-sm mb-6">No upcoming bookings.</p>
+      ) : (
+        <div className="mb-8 overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border text-left text-text-muted">
+                <th className="pb-3 font-semibold">Guest</th>
+                <th className="pb-3 font-semibold">Check in</th>
+                <th className="pb-3 font-semibold">Check out</th>
+                <th className="pb-3 font-semibold">Guests</th>
+              </tr>
+            </thead>
+            <tbody>
+              {upcoming.map((booking) => (
+                <tr key={booking.id} className="border-b border-border">
+                  <td className="py-3 text-text-primary">
+                    {booking.customer?.name || "Guest"}
+                  </td>
+                  <td className="py-3 text-text-muted">
+                    {formatDate(booking.dateFrom)}
+                  </td>
+                  <td className="py-3 text-text-muted">
+                    {formatDate(booking.dateTo)}
+                  </td>
+                  <td className="py-3 text-text-muted">{booking.guests}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Back button */}
+      <button
+        type="button"
+        onClick={onBack}
+        className="flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors cursor-pointer mb-6 text-sm"
+      >
+        <ArrowLeft size={16} />
+        Back to venues
+      </button>
+    </div>
+  );
+}
+
+export default VenueBookings;
