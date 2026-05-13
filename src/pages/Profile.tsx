@@ -7,11 +7,17 @@ import ButtonLink from "../components/ui/ButtonLink";
 import { House, Heart, MapPin } from "lucide-react";
 import type { Booking } from "../types/booking";
 import MyBookingsCard from "../components/profile/MyBookingsCard";
+import type { Venue } from "../types/venue";
+import MyVenueCard from "../components/profile/MyVenueCard";
+import { deleteVenue } from "../services/api";
+import ConfirmDeleteModal from "../components/ui/ConfirmDeleteModal";
+import VenueBookings from "../components/profile/VenueBookings";
 
 /**
  * Profile page displays user information and allows navigation between bookings, favorites, and venues.
  * Fetches profile data from the API.
  * Displays a users bookings, with the ability to delete them.
+ * For venue managers, it also shows their venues with options to view bookings and delete venues.
  * Shows loading state and error handling.
  */
 function Profile() {
@@ -23,6 +29,14 @@ function Profile() {
     "bookings" | "favorites" | "venues"
   >("bookings");
 
+  const [venues, setVenues] = useState<Venue[]>([]);
+  const [venueToDelete, setVenueToDelete] = useState<string | null>(null);
+  const [isDeletingVenue, setIsDeletingVenue] = useState(false);
+  const [selectedVenue, setSelectedVenue] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
+
   useEffect(() => {
     async function fetchProfile() {
       if (!user || !token || !apiKey) return;
@@ -30,6 +44,7 @@ function Profile() {
         const data = await getProfile(user.name, token, apiKey);
         setProfile(data);
         setBookings(data.bookings ?? []);
+        setVenues(data.venues ?? []);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
@@ -49,6 +64,20 @@ function Profile() {
       setBookings((prev) => prev.filter((b) => b.id !== id));
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleDeleteVenue = async () => {
+    if (!token || !apiKey || !venueToDelete) return;
+    try {
+      setIsDeletingVenue(true);
+      await deleteVenue(venueToDelete, token, apiKey);
+      setVenues((prev) => prev.filter((v) => v.id !== venueToDelete));
+      setVenueToDelete(null);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsDeletingVenue(false);
     }
   };
 
@@ -162,6 +191,7 @@ function Profile() {
 
           {/* Tab content */}
           <div className="p-6">
+            {/* My Bookings */}
             {activeTab === "bookings" && (
               <div>
                 {(() => {
@@ -222,16 +252,52 @@ function Profile() {
               </div>
             )}
 
+            {/* Favorites */}
             {activeTab === "favorites" && (
               <p className="text-text-muted text-sm">
                 My favorites will be displayed here.
               </p>
             )}
 
+            {/* My Venues ( Venue Managers) */}
             {activeTab === "venues" && (
-              <p className="text-text-muted text-sm">
-                My venues will be displayed here.
-              </p>
+              <div>
+                {selectedVenue ? (
+                  <VenueBookings
+                    venueId={selectedVenue.id}
+                    venueName={selectedVenue.name}
+                    onBack={() => setSelectedVenue(null)}
+                  />
+                ) : (
+                  <>
+                    {venues.length === 0 ? (
+                      <p className="text-text-muted text-sm">No venues yet.</p>
+                    ) : (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {venues.map((venue) => (
+                          <MyVenueCard
+                            key={venue.id}
+                            venue={venue}
+                            onDelete={(id) => setVenueToDelete(id)}
+                            onViewBookings={(id, name) =>
+                              setSelectedVenue({ id, name })
+                            }
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+
+            {venueToDelete && (
+              <ConfirmDeleteModal
+                message="Are you sure you want to delete this venue?"
+                onConfirm={handleDeleteVenue}
+                onCancel={() => setVenueToDelete(null)}
+                isLoading={isDeletingVenue}
+              />
             )}
           </div>
         </div>

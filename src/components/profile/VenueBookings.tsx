@@ -11,8 +11,7 @@ interface VenueBookingsProps {
 }
 
 /**
- * VenueBookings component displays all bookings for a specific venue.
- * Shows upcoming bookings with guest name, dates and number of guests.
+ * VenueBookings component shows upcoming bookings with guest name, dates and number of guests.
  * Displayed inside the My Venues tab on the Profile page.
  */
 function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
