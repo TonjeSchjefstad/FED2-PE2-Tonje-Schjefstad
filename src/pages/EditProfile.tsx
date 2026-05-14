@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ import {
 } from "../schemas/editProfileSchema";
 import Button from "../components/ui/Button";
 import ButtonLink from "../components/ui/ButtonLink";
+import toast from "react-hot-toast";
 
 /**
  * EditProfile page for updating user profile information.
@@ -36,8 +37,6 @@ function EditProfile() {
     },
   });
 
-  const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     async function fetchProfile() {
       if (!user || !token || !apiKey) return;
@@ -47,7 +46,9 @@ function EditProfile() {
         setValue("avatarUrl", data.avatar?.url || "");
         setValue("venueManager", data.venueManager);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        toast.error(
+          err instanceof Error ? err.message : "Something went wrong"
+        );
       }
     }
 
@@ -80,9 +81,10 @@ function EditProfile() {
         token,
         apiKey
       );
+      toast.success("Profile updated successfully");
       navigate("/profile");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   };
 
@@ -92,10 +94,6 @@ function EditProfile() {
         <h1 className="text-2xl font-bold text-text-primary mb-8 text-center">
           Edit profile
         </h1>
-
-        {error && (
-          <p className="text-error text-sm mb-4 text-center">{error}</p>
-        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           {/* Bio */}

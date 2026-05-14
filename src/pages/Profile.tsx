@@ -13,6 +13,7 @@ import MyVenueCard from "../components/profile/MyVenueCard";
 import { deleteVenue } from "../services/api";
 import ConfirmDeleteModal from "../components/ui/ConfirmDeleteModal";
 import VenueBookings from "../components/profile/VenueBookings";
+import toast from "react-hot-toast";
 
 /**
  * Profile page displays user information and allows navigation between bookings, favorites, and venues.
@@ -26,7 +27,6 @@ function Profile() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<
     "bookings" | "favorites" | "venues"
   >("bookings");
@@ -48,7 +48,9 @@ function Profile() {
         setBookings(data.bookings ?? []);
         setVenues(data.venues ?? []);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        toast.error(
+          err instanceof Error ? err.message : "Something went wrong"
+        );
       } finally {
         setIsLoading(false);
       }
@@ -70,8 +72,9 @@ function Profile() {
     try {
       await deleteBooking(id, token, apiKey);
       setBookings((prev) => prev.filter((b) => b.id !== id));
-    } catch (err) {
-      console.error(err);
+      toast.success("Booking deleted successfully");
+    } catch {
+      toast.error("Failed to delete booking");
     }
   };
 
@@ -82,8 +85,9 @@ function Profile() {
       await deleteVenue(venueToDelete, token, apiKey);
       setVenues((prev) => prev.filter((v) => v.id !== venueToDelete));
       setVenueToDelete(null);
-    } catch (err) {
-      console.error(err);
+      toast.success("Venue deleted successfully");
+    } catch {
+      toast.error("Failed to delete venue");
     } finally {
       setIsDeletingVenue(false);
     }
@@ -91,10 +95,10 @@ function Profile() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (error || !profile) {
+  if (!profile) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
-        <p className="text-error">{error || "Profile not found"}</p>
+        <p className="text-error">Profile not found</p>
       </div>
     );
   }

@@ -12,6 +12,7 @@ import Button from "../components/ui/Button";
 import ButtonLink from "../components/ui/ButtonLink";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ConfirmDeleteModal from "../components/ui/ConfirmDeleteModal";
+import toast from "react-hot-toast";
 
 /**
  * EditVenue page for venue managers to update or delete an existing venue.
@@ -22,7 +23,6 @@ function EditVenue() {
   const { user, token, apiKey } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -63,7 +63,9 @@ function EditVenue() {
         setValue("image2", data.media?.[1]?.url || "");
         setValue("image3", data.media?.[2]?.url || "");
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        toast.error(
+          err instanceof Error ? err.message : "Something went wrong"
+        );
       } finally {
         setIsLoading(false);
       }
@@ -81,7 +83,6 @@ function EditVenue() {
   const onSubmit = async (data: EditVenueFormData) => {
     if (!token || !apiKey || !id) return;
     try {
-      setError(null);
       const media = [data.image1, data.image2, data.image3]
         .filter(Boolean)
         .map((url) => ({ url: url!, alt: data.name }));
@@ -111,9 +112,10 @@ function EditVenue() {
         token,
         apiKey
       );
+      toast.success("Venue updated successfully");
       navigate("/profile");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   };
 
@@ -122,9 +124,10 @@ function EditVenue() {
     try {
       setIsDeleting(true);
       await deleteVenue(id, token, apiKey);
+      toast.success("Venue deleted successfully");
       navigate("/profile");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setIsDeleting(false);
     }
@@ -138,10 +141,6 @@ function EditVenue() {
         <h1 className="text-2xl font-bold text-text-primary mb-8 text-center">
           Edit venue
         </h1>
-
-        {error && (
-          <p className="text-error text-sm mb-4 text-center">{error}</p>
-        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
           {/* Venue Details */}

@@ -11,6 +11,7 @@ import { useAuth } from "../hooks/useAuth";
 import { Eye, EyeOff } from "lucide-react";
 import bgHero from "../assets/bg-hero.webp";
 import Button from "../components/ui/Button";
+import toast from "react-hot-toast";
 
 /**
  * Register page for creating a new Customer or Venue Manager account.
@@ -20,7 +21,6 @@ function Register() {
   const [accountType, setAccountType] = useState<"customer" | "venueManager">(
     "customer"
   );
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -38,7 +38,6 @@ function Register() {
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      setError(null);
       await registerUser({
         name: data.name,
         email: data.email,
@@ -52,9 +51,10 @@ function Register() {
       });
 
       login(result, result.accessToken);
+      toast.success("Account created successfully");
       navigate("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   };
 
@@ -108,11 +108,6 @@ function Register() {
               : "A venue manager account is used for adding and managing your own venues. If you only want to book venues, switch to Customer account."}
           </p>
         </div>
-
-        {/* Error message */}
-        {error && (
-          <p className="text-error text-sm mb-4 text-center">{error}</p>
-        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
