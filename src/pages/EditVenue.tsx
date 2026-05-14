@@ -19,7 +19,7 @@ import ConfirmDeleteModal from "../components/ui/ConfirmDeleteModal";
  */
 function EditVenue() {
   const { id } = useParams<{ id: string }>();
-  const { token, apiKey } = useAuth();
+  const { user, token, apiKey } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -71,6 +71,12 @@ function EditVenue() {
 
     fetchVenue();
   }, [id, setValue]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   const onSubmit = async (data: EditVenueFormData) => {
     if (!token || !apiKey || !id) return;

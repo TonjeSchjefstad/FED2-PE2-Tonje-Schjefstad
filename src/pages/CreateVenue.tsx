@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { createVenue } from "../services/api";
 import {
@@ -17,9 +17,15 @@ import ButtonLink from "../components/ui/ButtonLink";
  * On successful creation, navigates back to the profile page.
  */
 function CreateVenue() {
-  const { token, apiKey } = useAuth();
+  const { user, token, apiKey } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   const {
     register,
