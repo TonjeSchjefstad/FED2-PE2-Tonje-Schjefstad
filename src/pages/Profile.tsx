@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import { getProfile, deleteBooking } from "../services/api";
 import type { Profile } from "../types/profile";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -22,6 +23,7 @@ import VenueBookings from "../components/profile/VenueBookings";
  */
 function Profile() {
   const { user, token, apiKey } = useAuth();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -54,6 +56,12 @@ function Profile() {
 
     fetchProfile();
   }, [user, token, apiKey]);
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      navigate("/login");
+    }
+  }, [user, isLoading, navigate]);
 
   const [bookings, setBookings] = useState<Booking[]>([]);
 

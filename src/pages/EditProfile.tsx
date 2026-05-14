@@ -54,6 +54,12 @@ function EditProfile() {
     fetchProfile();
   }, [user, token, apiKey, setValue]);
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
   const venueManager = useWatch({ control, name: "venueManager" });
 
   const onSubmit = async (data: EditProfileFormData) => {
