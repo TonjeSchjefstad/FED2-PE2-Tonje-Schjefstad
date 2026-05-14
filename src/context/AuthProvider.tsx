@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AuthContext } from "./AuthContext";
 import type { AuthContextType } from "./AuthContext";
 import { createApiKey } from "../services/api";
+import toast from "react-hot-toast";
 
 interface User {
   name: string;
@@ -38,7 +39,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("apiKey");
-    window.location.href = "/";
+    toast.success("You have been logged out");
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1000);
   };
 
   return (

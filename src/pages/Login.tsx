@@ -8,6 +8,7 @@ import { loginSchema, type LoginFormData } from "../schemas/loginSchema";
 import { loginUser } from "../services/api";
 import { useAuth } from "../hooks/useAuth";
 import Button from "../components/ui/Button";
+import toast from "react-hot-toast";
 
 /**
  * Login page for signing in to an existing account.
@@ -15,7 +16,6 @@ import Button from "../components/ui/Button";
  */
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -29,16 +29,16 @@ function Login() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      setError(null);
       const result = await loginUser({
         email: data.email,
         password: data.password,
       });
 
       login(result, result.accessToken);
+      toast.success("Logged in successfully");
       navigate("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   };
 
@@ -49,11 +49,6 @@ function Login() {
     >
       <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 md:px-16 py-16 w-full max-w-lg shadow-lg">
         <h1 className="text-2xl font-bold text-text-primary mb-6">Sign In</h1>
-
-        {/* Error message */}
-        {error && (
-          <p className="text-error text-sm mb-4 text-center">{error}</p>
-        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

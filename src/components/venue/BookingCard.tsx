@@ -7,6 +7,7 @@ import AvailabilityCalendar from "./AvailabilityCalendar";
 import BookingConfirmModal from "./BookingConfirmModal";
 import { createBooking } from "../../services/api";
 import type { Booking } from "../../types/booking";
+import toast from "react-hot-toast";
 
 interface BookingCardProps {
   venueId: string;
@@ -67,8 +68,9 @@ function BookingCard({
       );
       setShowConfirm(false);
       setSuccess(true);
+      toast.success("Booking successful!");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Booking failed");
+      toast.error(err instanceof Error ? err.message : "Booking failed");
     } finally {
       setIsLoading(false);
     }

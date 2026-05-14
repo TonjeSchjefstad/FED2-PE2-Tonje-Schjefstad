@@ -10,6 +10,7 @@ import {
 } from "../schemas/createVenueSchema";
 import Button from "../components/ui/Button";
 import ButtonLink from "../components/ui/ButtonLink";
+import toast from "react-hot-toast";
 
 /**
  * CreateVenue page for venue managers to create a new venue.
@@ -74,8 +75,9 @@ function CreateVenue() {
         apiKey
       );
       navigate("/profile");
+      toast.success("Venue created successfully!");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     }
   };
 
