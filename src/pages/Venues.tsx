@@ -35,7 +35,7 @@ function Venues() {
     pets: false,
     minRating: 0,
     maxPrice: 10000,
-    minGuests: 0,
+    minGuests: 1,
   });
   const [showFilters, setShowFilters] = useState(false);
   const query = searchParams.get("q") || "";
@@ -134,7 +134,7 @@ function Venues() {
       {/* Filters panel */}
       {showFilters && (
         <div className="mb-6">
-          <Filters onFilterChange={setFilters} />
+          <Filters filters={filters} onFilterChange={setFilters} />
         </div>
       )}
 
