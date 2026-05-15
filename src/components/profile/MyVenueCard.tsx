@@ -10,6 +10,9 @@ interface MyVenueCardProps {
   onViewBookings: (id: string, name: string) => void;
 }
 
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1529686159790-3246c5082afb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
 /**
  * MyVenueCard displays a single venue in the My Venues tab.
  * Shows venue image, name, location, price, and action buttons.
@@ -20,9 +23,12 @@ function MyVenueCard({ venue, onDelete, onViewBookings }: MyVenueCardProps) {
     <div className="bg-bg-card rounded-xl border border-border overflow-hidden">
       {/* Venue image */}
       <img
-        src={venue.media?.[0]?.url || ""}
+        src={venue.media?.[0]?.url || FALLBACK_IMAGE}
         alt={venue.media?.[0]?.alt || venue.name}
         className="w-full h-48 object-cover"
+        onError={(e) => {
+          e.currentTarget.src = FALLBACK_IMAGE;
+        }}
       />
 
       {/* Venue info */}

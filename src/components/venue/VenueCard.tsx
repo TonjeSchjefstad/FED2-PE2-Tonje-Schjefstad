@@ -6,6 +6,9 @@ interface VenueCardProps {
   venue: Venue;
 }
 
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1529686159790-3246c5082afb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
 /**
  * VenueCard component displaying the basic information about a venue in a card format.
  * Shows the venue image, name, rating, location, and price per night.
@@ -20,9 +23,12 @@ function VenueCard({ venue }: VenueCardProps) {
     >
       {/* Venue image */}
       <img
-        src={media[0]?.url}
+        src={media[0]?.url || FALLBACK_IMAGE}
         alt={media[0]?.alt || name}
         className="w-full h-56 object-cover"
+        onError={(e) => {
+          e.currentTarget.src = FALLBACK_IMAGE;
+        }}
       />
 
       {/* Venue information */}
