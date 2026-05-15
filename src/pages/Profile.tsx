@@ -5,7 +5,7 @@ import { getProfile, deleteBooking } from "../services/api";
 import type { Profile } from "../types/profile";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ButtonLink from "../components/ui/ButtonLink";
-import { House, Heart, MapPin } from "lucide-react";
+import { House, MapPin } from "lucide-react";
 import type { Booking } from "../types/booking";
 import MyBookingsCard from "../components/profile/MyBookingsCard";
 import type { Venue } from "../types/venue";
@@ -16,7 +16,7 @@ import VenueBookings from "../components/profile/VenueBookings";
 import toast from "react-hot-toast";
 
 /**
- * Profile page displays user information and allows navigation between bookings, favorites, and venues.
+ * Profile page displays user information and allows navigation between bookings and venues.
  * Fetches profile data from the API.
  * Displays a users bookings, with the ability to delete them.
  * For venue managers, it also shows their venues with options to view bookings and delete venues.
@@ -27,9 +27,7 @@ function Profile() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<
-    "bookings" | "favorites" | "venues"
-  >("bookings");
+  const [activeTab, setActiveTab] = useState<"bookings" | "venues">("bookings");
 
   const [venues, setVenues] = useState<Venue[]>([]);
   const [venueToDelete, setVenueToDelete] = useState<string | null>(null);
@@ -149,13 +147,10 @@ function Profile() {
               className="w-full md:hidden border border-border rounded-lg px-4 py-2 text-sm text-text-primary outline-none focus:border-brand-primary bg-white cursor-pointer"
               value={activeTab}
               onChange={(e) =>
-                setActiveTab(
-                  e.target.value as "bookings" | "favorites" | "venues"
-                )
+                setActiveTab(e.target.value as "bookings" | "venues")
               }
             >
               <option value="bookings">My bookings</option>
-              <option value="favorites">My favorites</option>
               {profile.venueManager && (
                 <option value="venues">My venues</option>
               )}
@@ -173,17 +168,6 @@ function Profile() {
               >
                 <House size={16} />
                 My bookings
-              </button>
-              <button
-                onClick={() => setActiveTab("favorites")}
-                className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-colors cursor-pointer ${
-                  activeTab === "favorites"
-                    ? "bg-bg-muted text-text-primary font-semibold border border-border"
-                    : "text-text-muted hover:text-text-primary hover:bg-bg-secondary"
-                }`}
-              >
-                <Heart size={16} />
-                My favorites
               </button>
               {profile.venueManager && (
                 <button
@@ -262,13 +246,6 @@ function Profile() {
                   );
                 })()}
               </div>
-            )}
-
-            {/* Favorites */}
-            {activeTab === "favorites" && (
-              <p className="text-text-muted text-sm">
-                My favorites will be displayed here.
-              </p>
             )}
 
             {/* My Venues ( Venue Managers) */}
