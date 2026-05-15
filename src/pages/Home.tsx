@@ -66,7 +66,7 @@ function Home() {
         <h2 className="text-2xl md:text-4xl font-bold text-text-primary mb-2">
           Highly Rated Hideaways
         </h2>
-        <p className="text-text-muted mb-8">
+        <p className="text-text-muted mb-8 text-sm">
           Explore accommodations that travelers consistently rate highly for
           comfort, cleanliness, and location. Carefully selected based on guest
           reviews, these stays offer reliable quality and a welcoming atmosphere
@@ -77,12 +77,12 @@ function Home() {
           <LoadingSpinner />
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto">
               {venues.map((venue) => (
                 <VenueCard key={venue.id} venue={venue} />
               ))}
             </div>
-            <div className="flex justify-end mt-6">
+            <div className="flex justify-center md:justify-end mt-6">
               <ButtonLink to="/venues">View All Venues</ButtonLink>
             </div>
           </>
@@ -102,9 +102,9 @@ function Home() {
           </div>
 
           {/* Content */}
-          <div className="w-full md:w-1/2">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4 text-brand-primary">
-              Why <span className="text-text-primary">Choose Us</span>
+          <div className="w-full md:w-1/2 text-sm">
+            <h2 className="text-2xl md:text-4xl font-bold mb-4 text-text-primary">
+              Why Choose Us
             </h2>
             <p className="text-text-muted mb-6">
               We make finding the perfect stay simple, secure, and stress-free.
@@ -113,19 +113,19 @@ function Home() {
             </p>
             <ul className="space-y-3 text-text-primary mb-6 font-semibold">
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">◆</span>
+                <span className="text-brand-primary">●</span>
                 Carefully selected accommodations
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">◆</span>
+                <span className="text-brand-primary">●</span>
                 Real reviews from real guests
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">◆</span>
+                <span className="text-brand-primary">●</span>
                 Clear prices. No hidden fees.
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">◆</span>
+                <span className="text-brand-primary">●</span>
                 Friendly support when you need it.
               </li>
             </ul>

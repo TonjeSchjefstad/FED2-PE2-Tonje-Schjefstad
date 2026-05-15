@@ -6,21 +6,38 @@ interface ImageCarouselProps {
   alt: string;
 }
 
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1529686159790-3246c5082afb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
 /**
  * ImageCarousel component for displaying multiple images with navigation.
  * Shows previous/next buttons and dot indicators when multiple images are available.
+ * Falls back to a default image if no images are provided or if an image fails to load.
  */
 function ImageCarousel({ images, alt }: ImageCarouselProps) {
   const [currentImage, setCurrentImage] = useState(0);
 
-  if (images.length === 0) return null;
+  if (images.length === 0) {
+    return (
+      <div className="relative w-full h-100 rounded-xl overflow-hidden mb-8">
+        <img
+          src={FALLBACK_IMAGE}
+          alt={alt}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-100 rounded-xl overflow-hidden mb-8">
       <img
-        src={images[currentImage]?.url}
-        alt={images[currentImage]?.alt || alt}
+        src={images[currentImage].url}
+        alt={images[currentImage].alt || alt}
         className="w-full h-full object-cover"
+        onError={(e) => {
+          e.currentTarget.src = FALLBACK_IMAGE;
+        }}
       />
 
       {images.length > 1 && (

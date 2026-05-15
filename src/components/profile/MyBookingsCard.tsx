@@ -9,6 +9,9 @@ interface MyBookingsCardProps {
   onDelete: (id: string) => void;
 }
 
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1529686159790-3246c5082afb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
 /**
  * MyBookingsCard component displays individual booking details in the profile page.
  * Receives booking data and a delete handler as props.
@@ -43,9 +46,12 @@ function MyBookingsCard({ booking, onDelete }: MyBookingsCardProps) {
     <div className="flex items-center gap-4 bg-bg-card rounded-xl border border-border p-4">
       {/* Venue image */}
       <img
-        src={booking.venue?.media?.[0]?.url || ""}
+        src={booking.venue?.media?.[0]?.url || FALLBACK_IMAGE}
         alt={booking.venue?.name || "Venue"}
         className="w-20 h-20 rounded-lg object-cover bg-bg-secondary shrink-0"
+        onError={(e) => {
+          e.currentTarget.src = FALLBACK_IMAGE;
+        }}
       />
 
       {/* Booking info */}

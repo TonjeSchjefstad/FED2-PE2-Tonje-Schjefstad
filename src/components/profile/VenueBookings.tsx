@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getVenue } from "../../services/api";
 import type { Booking } from "../../types/booking";
 import LoadingSpinner from "../ui/LoadingSpinner";
-import { ArrowLeft } from "lucide-react";
+import Button from "../ui/Button";
 
 interface VenueBookingsProps {
   venueId: string;
@@ -96,14 +96,9 @@ function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
       )}
 
       {/* Back button */}
-      <button
-        type="button"
-        onClick={onBack}
-        className="flex items-center gap-2 text-text-muted hover:text-text-primary transition-colors cursor-pointer mb-6 text-sm"
-      >
-        <ArrowLeft size={16} />
-        Back to venues
-      </button>
+      <Button variant="outline" size="sm" onClick={onBack}>
+        Back
+      </Button>
     </div>
   );
 }

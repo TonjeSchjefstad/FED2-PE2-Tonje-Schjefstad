@@ -1,7 +1,7 @@
-import { useState } from "react";
 import Button from "../ui/Button";
 
 interface FiltersProps {
+  filters: FilterState;
   onFilterChange: (filters: FilterState) => void;
 }
 
@@ -19,35 +19,22 @@ export interface FilterState {
  * Filters component for the venues page.
  * Allows users to filter venues by amenities, price range, number of guests and minimum rating.
  */
-function Filters({ onFilterChange }: FiltersProps) {
-  const [filters, setFilters] = useState<FilterState>({
-    wifi: false,
-    breakfast: false,
-    parking: false,
-    pets: false,
-    minRating: 0,
-    maxPrice: 10000,
-    minGuests: 0,
-  });
-
+function Filters({ filters, onFilterChange }: FiltersProps) {
   const handleChange = (key: keyof FilterState, value: boolean | number) => {
     const updated = { ...filters, [key]: value };
-    setFilters(updated);
     onFilterChange(updated);
   };
 
   const handleClear = () => {
-    const defaultFilters: FilterState = {
+    onFilterChange({
       wifi: false,
       breakfast: false,
       parking: false,
       pets: false,
       minRating: 0,
       maxPrice: 10000,
-      minGuests: 0,
-    };
-    setFilters(defaultFilters);
-    onFilterChange(defaultFilters);
+      minGuests: 1,
+    });
   };
 
   return (
@@ -55,7 +42,9 @@ function Filters({ onFilterChange }: FiltersProps) {
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
         {/* Amenities */}
         <div>
-          <h3 className="font-semibold text-text-primary mb-3">Amenities</h3>
+          <h3 className="font-semibold text-text-primary mb-3 text-sm">
+            Amenities
+          </h3>
           <div className="flex flex-col gap-2">
             {(["wifi", "breakfast", "parking", "pets"] as const).map((key) => (
               <label
@@ -78,14 +67,14 @@ function Filters({ onFilterChange }: FiltersProps) {
 
         {/* Number of guests */}
         <div>
-          <h3 className="font-semibold text-text-primary mb-3">
+          <h3 className="font-semibold text-text-primary mb-3 text-sm">
             Number of guests
           </h3>
           <div className="flex items-center gap-6 border border-border rounded-lg px-6 py-2 w-fit">
             <button
               type="button"
               onClick={() =>
-                handleChange("minGuests", Math.max(0, filters.minGuests - 1))
+                handleChange("minGuests", Math.max(1, filters.minGuests - 1))
               }
               className="text-text-muted hover:text-brand-primary transition-colors cursor-pointer text-lg"
             >
@@ -106,7 +95,7 @@ function Filters({ onFilterChange }: FiltersProps) {
 
         {/* Minimum Rating */}
         <div>
-          <h3 className="font-semibold text-text-primary mb-3">
+          <h3 className="font-semibold text-text-primary mb-3 text-sm">
             Minimum Rating
           </h3>
           <div className="flex gap-1">
@@ -130,9 +119,9 @@ function Filters({ onFilterChange }: FiltersProps) {
 
         {/* Price Range */}
         <div className="md:col-span-2">
-          <h3 className="font-semibold text-text-primary mb-3">
+          <h3 className="font-semibold text-text-primary mb-3 text-sm">
             Price Range
-            <span className="text-text-muted font-normal text-sm ml-2">
+            <span className="text-text-muted font-normal text-xs ml-2">
               Max ${filters.maxPrice}
             </span>
           </h3>

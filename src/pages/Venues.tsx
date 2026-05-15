@@ -35,7 +35,7 @@ function Venues() {
     pets: false,
     minRating: 0,
     maxPrice: 10000,
-    minGuests: 0,
+    minGuests: 1,
   });
   const [showFilters, setShowFilters] = useState(false);
   const query = searchParams.get("q") || "";
@@ -119,22 +119,22 @@ function Venues() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 border border-border rounded-lg px-4 py-2 text-sm text-text-primary hover:border-brand-primary transition-colors cursor-pointer"
+            className="flex items-center gap-2 border border-border rounded-lg px-4 py-2 text-sm bg-bg-card text-text-primary hover:border-brand-primary transition-colors cursor-pointer"
           >
             <SlidersHorizontal size={16} />
             Filters
           </button>
-          <p className="text-text-muted text-sm">
-            {filteredVenues.length} venues found
-          </p>
+          <Sorting value={sortBy} onChange={setSortBy} />
         </div>
-        <Sorting value={sortBy} onChange={setSortBy} />
+        <p className="text-text-muted text-sm">
+          {filteredVenues.length} venues found
+        </p>
       </div>
 
       {/* Filters panel */}
       {showFilters && (
         <div className="mb-6">
-          <Filters onFilterChange={setFilters} />
+          <Filters filters={filters} onFilterChange={setFilters} />
         </div>
       )}
 
