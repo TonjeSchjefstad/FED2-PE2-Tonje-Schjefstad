@@ -119,16 +119,16 @@ function Venues() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 border border-border rounded-lg px-4 py-2 text-sm text-text-primary hover:border-brand-primary transition-colors cursor-pointer"
+            className="flex items-center gap-2 border border-border rounded-lg px-4 py-2 text-sm bg-bg-card text-text-primary hover:border-brand-primary transition-colors cursor-pointer"
           >
             <SlidersHorizontal size={16} />
             Filters
           </button>
-          <p className="text-text-muted text-sm">
-            {filteredVenues.length} venues found
-          </p>
+          <Sorting value={sortBy} onChange={setSortBy} />
         </div>
-        <Sorting value={sortBy} onChange={setSortBy} />
+        <p className="text-text-muted text-sm">
+          {filteredVenues.length} venues found
+        </p>
       </div>
 
       {/* Filters panel */}
