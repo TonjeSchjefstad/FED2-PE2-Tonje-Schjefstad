@@ -16,7 +16,7 @@ function VenueCard({ venue }: VenueCardProps) {
   return (
     <Link
       to={`/venues/${id}`}
-      className="block bg-bg-card rounded-xl max-w-xs overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+      className="block bg-bg-card rounded-xl max-full overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
     >
       {/* Venue image */}
       <img
