@@ -222,7 +222,7 @@ function CreateVenue() {
                 </label>
                 <input
                   {...register("country")}
-                  placeholder=""
+                  placeholder="Norway"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
