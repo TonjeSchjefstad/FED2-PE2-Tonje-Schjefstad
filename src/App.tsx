@@ -10,6 +10,7 @@ import EditProfile from "./pages/EditProfile";
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/venues" element={<Venues />} />
           <Route path="/venues/:id" element={<VenueDetail />} />
+          <Route path="/about" element={<About />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/create-venue" element={<CreateVenue />} />
           <Route path="/edit-venue/:id" element={<EditVenue />} />
