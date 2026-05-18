@@ -17,9 +17,18 @@ interface User {
  * On login, also creates an API key and stores it.
  */
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthContextType["user"]>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [apiKey, setApiKey] = useState<string | null>(null);
+  const [user, setUser] = useState<AuthContextType["user"]>(() => {
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : null;
+  });
+
+  const [token, setToken] = useState<string | null>(() => {
+    return localStorage.getItem("token");
+  });
+
+  const [apiKey, setApiKey] = useState<string | null>(() => {
+    return localStorage.getItem("apiKey");
+  });
 
   const login = async (user: User, token: string) => {
     setUser(user);
