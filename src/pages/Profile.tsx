@@ -22,7 +22,7 @@ import toast from "react-hot-toast";
  * For venue managers, it also shows their venues with options to view bookings and delete venues.
  * Shows loading state and error handling.
  */
-function Profile() {
+function ProfilePage() {
   const { user, token, apiKey } = useAuth();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -295,4 +295,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfilePage;
