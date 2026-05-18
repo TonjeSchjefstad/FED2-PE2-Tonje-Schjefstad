@@ -115,7 +115,7 @@ function Venues() {
       <SearchBar initialQuery={query} onSearch={handleSearch} />
 
       {/* Sort and results count */}
-      <div className="flex justify-between items-center mt-6 mb-2">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 mb-2 gap-3">
         <div className="flex items-center gap-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
