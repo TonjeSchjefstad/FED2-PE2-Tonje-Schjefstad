@@ -177,7 +177,7 @@ function EditProfile() {
               isLoading={isSubmitting}
               className="flex-1"
             >
-              Update profile
+              Update
             </Button>
             <ButtonLink
               to="/profile"

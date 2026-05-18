@@ -282,7 +282,7 @@ function CreateVenue() {
               isLoading={isSubmitting}
               className="flex-1"
             >
-              + Create venue
+              + Create
             </Button>
             <ButtonLink
               to="/profile"

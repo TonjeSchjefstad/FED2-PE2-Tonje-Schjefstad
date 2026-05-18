@@ -331,7 +331,7 @@ function EditVenue() {
               isLoading={isSubmitting}
               className="flex-1"
             >
-              Save changes
+              Save
             </Button>
             <ButtonLink
               to="/profile"
