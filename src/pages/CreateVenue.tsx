@@ -105,6 +105,7 @@ function CreateVenue() {
                 </label>
                 <input
                   {...register("name")}
+                  placeholder="Enter venue name"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
                 {errors.name && (
@@ -120,6 +121,7 @@ function CreateVenue() {
                 <textarea
                   {...register("description")}
                   rows={4}
+                  placeholder="Enter venue description"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white resize-none"
                 />
                 {errors.description && (
@@ -220,6 +222,7 @@ function CreateVenue() {
                 </label>
                 <input
                   {...register("country")}
+                  placeholder=""
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -229,6 +232,7 @@ function CreateVenue() {
                 </label>
                 <input
                   {...register("address")}
+                  placeholder="Sjøgata 1"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -238,6 +242,7 @@ function CreateVenue() {
                 </label>
                 <input
                   {...register("zip")}
+                  placeholder="1001"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -247,6 +252,7 @@ function CreateVenue() {
                 </label>
                 <input
                   {...register("city")}
+                  placeholder="Oslo"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
