@@ -91,7 +91,7 @@ function BookingConfirmModal({
             isLoading={isLoading}
             className="flex-1"
           >
-            Book Now
+            Book
           </Button>
         </div>
       </div>
