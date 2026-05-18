@@ -47,7 +47,7 @@ function Login() {
       className="min-h-[65vh] md:min-h-[80vh] bg-cover bg-center flex items-center justify-center px-4 md:-mt-22.5"
       style={{ backgroundImage: `url(${bgHero})` }}
     >
-      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 md:px-16 py-16 w-full max-w-lg shadow-lg">
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl px-8 md:px-16 py-12 md:py-16 w-full max-w-lg shadow-lg">
         <h1 className="text-2xl font-bold text-text-primary mb-6">Sign In</h1>
 
         {/* Form */}
