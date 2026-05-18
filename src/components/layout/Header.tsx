@@ -51,13 +51,7 @@ function Header() {
               Venues
             </NavLink>
             <NavLink
-              to="/"
-              className="text-text-primary hover:text-brand-primary transition-colors"
-            >
-              Support
-            </NavLink>
-            <NavLink
-              to="/"
+              to="/about"
               className="text-text-primary hover:text-brand-primary transition-colors"
             >
               About
@@ -176,14 +170,7 @@ function Header() {
             Venues
           </NavLink>
           <NavLink
-            to="/"
-            onClick={() => setIsMenuOpen(false)}
-            className="py-4 border-b border-border text-text-primary hover:text-brand-primary transition-colors"
-          >
-            Support
-          </NavLink>
-          <NavLink
-            to="/"
+            to="/about"
             onClick={() => setIsMenuOpen(false)}
             className="py-4 text-text-primary hover:text-brand-primary transition-colors"
           >
