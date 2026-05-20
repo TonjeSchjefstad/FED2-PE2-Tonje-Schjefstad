@@ -179,10 +179,12 @@ function AvailabilityCalendar({
         className="bg-white rounded-xl p-6 w-full max-w-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* 2 months side by side */}
+        {/* 2 months side by side on desktop, 1 on mobile */}
         <div className="flex gap-8 mb-6">
           {renderMonth(viewMonth, viewYear)}
-          {renderMonth(nextMonth, nextYear)}
+          <div className="hidden sm:block flex-1">
+            {renderMonth(nextMonth, nextYear)}
+          </div>
         </div>
 
         {/* Navigation and buttons */}
