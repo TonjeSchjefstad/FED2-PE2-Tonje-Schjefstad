@@ -40,10 +40,8 @@ function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
   const upcoming = bookings.filter((b) => new Date(b.dateTo) >= today);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("nb-NO", {
-      day: "2-digit",
-      month: "short",
-    });
+    const [year, month, day] = dateString.split("T")[0].split("-");
+    return `${day.padStart(2, "0")}.${month.padStart(2, "0")}.${year.slice(2)}`;
   };
 
   if (isLoading) return <LoadingSpinner />;
