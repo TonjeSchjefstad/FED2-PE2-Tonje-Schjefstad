@@ -48,7 +48,7 @@ function MyBookingsCard({ booking, onDelete }: MyBookingsCardProps) {
       <img
         src={booking.venue?.media?.[0]?.url || FALLBACK_IMAGE}
         alt={booking.venue?.name || "Venue"}
-        className="w-20 h-20 rounded-lg object-cover bg-bg-secondary shrink-0"
+        className="hidden sm:block w-20 h-20 rounded-lg object-cover bg-bg-secondary shrink-0"
         onError={(e) => {
           e.currentTarget.src = FALLBACK_IMAGE;
         }}
