@@ -63,34 +63,54 @@ function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
       {upcoming.length === 0 ? (
         <p className="text-text-muted text-sm mb-6">No upcoming bookings.</p>
       ) : (
-        <div className="mb-8 overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border text-left text-text-muted">
-                <th className="pb-3 font-semibold">Guest</th>
-                <th className="pb-3 font-semibold">Check in</th>
-                <th className="pb-3 font-semibold">Check out</th>
-                <th className="pb-3 font-semibold">Guests</th>
-              </tr>
-            </thead>
-            <tbody>
-              {upcoming.map((booking) => (
-                <tr key={booking.id} className="border-b border-border">
-                  <td className="py-3 text-text-primary">
-                    {booking.customer?.name || "Guest"}
-                  </td>
-                  <td className="py-3 text-text-muted">
-                    {formatDate(booking.dateFrom)}
-                  </td>
-                  <td className="py-3 text-text-muted">
-                    {formatDate(booking.dateTo)}
-                  </td>
-                  <td className="py-3 text-text-muted">{booking.guests}</td>
+        <>
+          {/* Desktop table */}
+          <div className="hidden sm:block mb-8 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border text-left text-text-muted">
+                  <th className="pb-3 font-semibold">Guest</th>
+                  <th className="pb-3 font-semibold">Check in</th>
+                  <th className="pb-3 font-semibold">Check out</th>
+                  <th className="pb-3 font-semibold">Guests</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {upcoming.map((booking) => (
+                  <tr key={booking.id} className="border-b border-border">
+                    <td className="py-3 text-text-primary">
+                      {booking.customer?.name || "Guest"}
+                    </td>
+                    <td className="py-3 text-text-muted">
+                      {formatDate(booking.dateFrom)}
+                    </td>
+                    <td className="py-3 text-text-muted">
+                      {formatDate(booking.dateTo)}
+                    </td>
+                    <td className="py-3 text-text-muted">{booking.guests}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile table*/}
+          <div className="sm:hidden mb-8 space-y-0">
+            {upcoming.map((booking) => (
+              <div key={booking.id} className="border-b border-border py-3">
+                <p className="text-text-primary text-sm font-semibold">
+                  {booking.customer?.name || "Guest"}
+                </p>
+                <p className="text-text-muted text-sm">
+                  {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
+                </p>
+                <p className="text-text-muted text-sm">
+                  {booking.guests} {booking.guests === 1 ? "guest" : "guests"}
+                </p>
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Back button */}
