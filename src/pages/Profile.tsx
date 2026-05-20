@@ -146,9 +146,10 @@ function ProfilePage() {
             <select
               className="w-full md:hidden border border-border rounded-lg px-4 py-2 text-sm text-text-primary outline-none focus:border-brand-primary bg-white cursor-pointer"
               value={activeTab}
-              onChange={(e) =>
-                setActiveTab(e.target.value as "bookings" | "venues")
-              }
+              onChange={(e) => {
+                setActiveTab(e.target.value as "bookings" | "venues");
+                setSelectedVenue(null);
+              }}
             >
               <option value="bookings">My bookings</option>
               {profile.venueManager && (
@@ -159,7 +160,10 @@ function ProfilePage() {
             {/* Desktop box tabs */}
             <div className="hidden md:flex gap-2">
               <button
-                onClick={() => setActiveTab("bookings")}
+                onClick={() => {
+                  setActiveTab("bookings");
+                  setSelectedVenue(null);
+                }}
                 className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-colors cursor-pointer ${
                   activeTab === "bookings"
                     ? "bg-bg-muted text-text-primary font-semibold border border-border"
@@ -171,7 +175,10 @@ function ProfilePage() {
               </button>
               {profile.venueManager && (
                 <button
-                  onClick={() => setActiveTab("venues")}
+                  onClick={() => {
+                    setActiveTab("venues");
+                    setSelectedVenue(null);
+                  }}
                   className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-colors cursor-pointer ${
                     activeTab === "venues"
                       ? "bg-bg-muted text-text-primary font-semibold border border-border"
