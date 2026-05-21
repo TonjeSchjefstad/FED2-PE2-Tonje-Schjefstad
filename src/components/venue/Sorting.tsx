@@ -18,7 +18,6 @@ function Sorting({ value, onChange }: SortingProps) {
         <option value="recommended">Recommended</option>
         <option value="price_high">High to low</option>
         <option value="price_low">Low to high</option>
-        <option value="newest">Newest</option>
       </select>
       <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted">
         ▾

@@ -64,8 +64,7 @@ function Venues() {
   const sortedVenues = [...venues].sort((a, b) => {
     if (sortBy === "price_high") return b.price - a.price;
     if (sortBy === "price_low") return a.price - b.price;
-    if (sortBy === "newest")
-      return new Date(b.created).getTime() - new Date(a.created).getTime();
+    return new Date(b.created).getTime() - new Date(a.created).getTime();
     return 0;
   });
 
