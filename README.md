@@ -132,11 +132,11 @@ npm run build
 ## Future Improvements
 - Add favourites functionality
 - Implement interactive map on venue detail page
-- Custom toast notification system
+- Add custom toast notification system
+- Add unit and e2e testing
 
 ## Contact
 - My LinkedIn page: https://www.linkedin.com/in/tonjeschjefstad/
 - My GitHub Profile: https://github.com/TonjeSchjefstad
-- Email: Tonje_schjefen@hotmail.com
   
   
