@@ -237,7 +237,7 @@ function Register() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-brand-primary font-semibold hover:underline"
+            className="text-button-active font-semibold hover:underline"
           >
             Sign in here!
           </Link>

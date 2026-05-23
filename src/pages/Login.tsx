@@ -140,7 +140,7 @@ function Login() {
           Don't have an account?{" "}
           <Link
             to="/register"
-            className="text-brand-primary font-semibold hover:underline"
+            className="text-button-active font-semibold hover:underline"
           >
             Register here!
           </Link>
