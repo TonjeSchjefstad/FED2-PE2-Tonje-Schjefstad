@@ -11,6 +11,8 @@ function Sorting({ value, onChange }: SortingProps) {
   return (
     <div className="relative">
       <select
+        id="sorting"
+        name="sorting"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-label="sort venues"
