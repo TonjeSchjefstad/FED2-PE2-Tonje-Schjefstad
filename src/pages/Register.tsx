@@ -123,6 +123,8 @@ function Register() {
             <input
               id="name"
               {...register("name")}
+              type="text"
+              autoComplete="name"
               placeholder="Your name"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
             />
@@ -141,6 +143,8 @@ function Register() {
             <input
               id="email"
               {...register("email")}
+              type="email"
+              autoComplete="email"
               placeholder="example@stud.noroff.no"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
             />
@@ -209,7 +213,11 @@ function Register() {
                   showConfirmPassword ? "Hide password" : "Show password"
                 }
               >
-                {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                {showConfirmPassword ? (
+                  <EyeOff size={16} aria-hidden="true" />
+                ) : (
+                  <Eye size={16} aria-hidden="true" />
+                )}
               </button>
             </div>
             {errors.confirmPassword && (

@@ -103,6 +103,7 @@ function CreateVenue() {
                 <input
                   {...register("name")}
                   id="name"
+                  autoComplete="off"
                   placeholder="Enter venue name"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -242,6 +243,7 @@ function CreateVenue() {
                 <input
                   {...register("country")}
                   id="country"
+                  autoComplete="country-name"
                   placeholder="Norway"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -256,6 +258,7 @@ function CreateVenue() {
                 <input
                   {...register("address")}
                   id="address"
+                  autoComplete="street-address"
                   placeholder="Sjøgata 1"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -270,6 +273,7 @@ function CreateVenue() {
                 <input
                   {...register("zip")}
                   id="zip"
+                  autoComplete="postal-code"
                   placeholder="1001"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -285,6 +289,7 @@ function CreateVenue() {
                   {...register("city")}
                   placeholder="Oslo"
                   id="city"
+                  autoComplete="address-level2"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -307,6 +312,7 @@ function CreateVenue() {
                   </label>
 
                   <input
+                    id={key}
                     {...register(key)}
                     placeholder="http://example.com/image1.jpg"
                     className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"

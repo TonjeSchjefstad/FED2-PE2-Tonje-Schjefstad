@@ -159,6 +159,7 @@ function EditVenue() {
                 <input
                   {...register("name")}
                   id="name"
+                  autoComplete="off"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
                 {errors.name && (
@@ -291,6 +292,7 @@ function EditVenue() {
                 <input
                   {...register("country")}
                   id="country"
+                  autoComplete="country-name"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -304,6 +306,7 @@ function EditVenue() {
                 <input
                   {...register("address")}
                   id="address"
+                  autoComplete="street-address"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -317,6 +320,7 @@ function EditVenue() {
                 <input
                   {...register("city")}
                   id="city"
+                  autoComplete="address-level2"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -330,6 +334,7 @@ function EditVenue() {
                 <input
                   {...register("zip")}
                   id="zip"
+                  autoComplete="postal-code"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>

@@ -62,6 +62,8 @@ function Login() {
             <input
               {...register("email")}
               id="email"
+              type="email"
+              autoComplete="email"
               placeholder="example@stud.noroff.no"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
             />
@@ -114,6 +116,7 @@ function Login() {
             >
               <input
                 type="checkbox"
+                name="remember"
                 id="remember"
                 className="accent-button-primary cursor-pointer"
               />

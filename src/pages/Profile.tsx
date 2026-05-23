@@ -147,6 +147,8 @@ function ProfilePage() {
           <div className="p-4">
             {/* Mobile dropdown */}
             <select
+              id="profile-tab"
+              name="profile-tab"
               aria-label="Select tab"
               className="w-full md:hidden border border-border rounded-lg px-4 py-2 text-sm text-text-primary outline-none focus:border-brand-primary bg-white cursor-pointer"
               value={activeTab}
