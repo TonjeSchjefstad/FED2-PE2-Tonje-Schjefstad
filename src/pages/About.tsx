@@ -8,7 +8,7 @@ function About() {
     <div className="max-w-4xl mx-auto px-6 py-16">
       <div className="mb-16">
         <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-6">
-          About <span className="text-brand-primary">Holidaze</span>
+          About <span className="text-button-active">Holidaze</span>
         </h1>
         <p className="text-text-muted text-lg leading-relaxed max-w-2xl">
           We believe travel should be simple, honest, and unforgettable.
