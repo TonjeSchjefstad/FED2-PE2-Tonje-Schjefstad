@@ -64,7 +64,6 @@ function Venues() {
   const sortedVenues = [...venues].sort((a, b) => {
     if (sortBy === "price_high") return b.price - a.price;
     if (sortBy === "price_low") return a.price - b.price;
-    return new Date(b.created).getTime() - new Date(a.created).getTime();
     return 0;
   });
 
@@ -118,9 +117,11 @@ function Venues() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => setShowFilters(!showFilters)}
+            aria-expanded={showFilters}
+            aria-controls="filters-panel"
             className="flex items-center gap-2 border border-border rounded-lg px-4 py-2 text-sm bg-bg-card text-text-primary hover:border-brand-primary transition-colors cursor-pointer"
           >
-            <SlidersHorizontal size={16} />
+            <SlidersHorizontal size={16} aria-hidden="true" />
             Filters
           </button>
           <Sorting value={sortBy} onChange={setSortBy} />
@@ -132,7 +133,7 @@ function Venues() {
 
       {/* Filters panel */}
       {showFilters && (
-        <div className="mb-6">
+        <div id="filters-panel" className="mb-6">
           <Filters filters={filters} onFilterChange={setFilters} />
         </div>
       )}

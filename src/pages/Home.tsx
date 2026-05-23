@@ -36,11 +36,12 @@ function Home() {
     <div>
       {/* Hero section */}
       <section
+        aria-label="hero"
         className="relative w-full h-120 md:h-180 bg-cover bg-center flex flex-col items-center justify-center text-center px-6 md:-mt-22.5"
         style={{ backgroundImage: `url(${bgHero})` }}
       >
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/5" />
+        <div className="absolute inset-0 bg-black/5" aria-hidden="true" />
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mb-">
@@ -96,7 +97,7 @@ function Home() {
           <div className="w-full md:w-1/2">
             <img
               src={chooseUs}
-              alt="Beautiful landscape"
+              alt="Sunrise over a beautiful landscape"
               className="rounded-xl w-full h-72 md:h-104 object-cover"
             />
           </div>
@@ -111,21 +112,32 @@ function Home() {
               Whether you're planning a weekend getaway or a longer adventure,
               we connect you with accommodations you can trust.
             </p>
-            <ul className="space-y-3 text-text-primary mb-6 font-semibold">
+            <ul
+              className="space-y-3 text-text-primary mb-6 font-semibold"
+              role="list"
+            >
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">●</span>
+                <span className="text-brand-primary" aria-hidden="true">
+                  ●
+                </span>
                 Carefully selected accommodations
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">●</span>
+                <span className="text-brand-primary" aria-hidden="true">
+                  ●
+                </span>
                 Real reviews from real guests
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">●</span>
+                <span className="text-brand-primary" aria-hidden="true">
+                  ●
+                </span>
                 Clear prices. No hidden fees.
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-brand-primary">●</span>
+                <span className="text-brand-primary" aria-hidden="true">
+                  ●
+                </span>
                 Friendly support when you need it.
               </li>
             </ul>

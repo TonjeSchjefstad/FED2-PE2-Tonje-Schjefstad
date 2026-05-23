@@ -73,6 +73,7 @@ function Filters({ filters, onFilterChange }: FiltersProps) {
           <div className="flex items-center gap-6 border border-border rounded-lg px-6 py-2 w-fit">
             <button
               type="button"
+              aria-label="Decrease minimum guests"
               onClick={() =>
                 handleChange("minGuests", Math.max(1, filters.minGuests - 1))
               }
@@ -85,6 +86,7 @@ function Filters({ filters, onFilterChange }: FiltersProps) {
             </span>
             <button
               type="button"
+              aria-label="Increase minimum guests"
               onClick={() => handleChange("minGuests", filters.minGuests + 1)}
               className="text-text-muted hover:text-brand-primary transition-colors cursor-pointer text-lg"
             >
@@ -103,6 +105,8 @@ function Filters({ filters, onFilterChange }: FiltersProps) {
               <button
                 key={star}
                 type="button"
+                aria-label={`Set minimum rating to ${star}`}
+                aria-pressed={star <= filters.minRating}
                 onClick={() =>
                   handleChange(
                     "minRating",
@@ -127,6 +131,7 @@ function Filters({ filters, onFilterChange }: FiltersProps) {
           </h3>
           <input
             type="range"
+            aria-label="Maximum price"
             min={0}
             max={10000}
             step={100}

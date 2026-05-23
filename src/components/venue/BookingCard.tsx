@@ -37,7 +37,6 @@ function BookingCard({
   const [showCalendar, setShowCalendar] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
   const nights =
@@ -60,7 +59,6 @@ function BookingCard({
     if (!token) return;
     try {
       setIsLoading(true);
-      setError(null);
       await createBooking(
         { dateFrom, dateTo, guests, venueId },
         token,
@@ -163,6 +161,7 @@ function BookingCard({
         {/* Date field */}
         <button
           type="button"
+          aria-label="Select booking dates"
           onClick={() => setShowCalendar(true)}
           className="w-full flex items-center gap-3 border border-border rounded-lg px-4 py-3 text-sm text-text-muted mb-3 hover:border-brand-primary transition-colors cursor-pointer bg-white"
         >
@@ -183,6 +182,7 @@ function BookingCard({
           <div className="flex items-center gap-3">
             <button
               type="button"
+              aria-label="Decrease number of guests"
               onClick={() => setGuests(Math.max(1, guests - 1))}
               className="text-text-muted hover:text-brand-primary transition-colors cursor-pointer text-lg"
             >
@@ -193,6 +193,7 @@ function BookingCard({
             </span>
             <button
               type="button"
+              aria-label="Increase number of guests"
               onClick={() => setGuests(Math.min(maxGuests, guests + 1))}
               className="text-text-muted hover:text-brand-primary transition-colors cursor-pointer text-lg"
             >
@@ -215,8 +216,6 @@ function BookingCard({
             <span className="font-bold text-text-primary">= ${totalPrice}</span>
           </div>
         )}
-        {/* Error message */}
-        {error && <p className="text-error text-sm mb-4">{error}</p>}
 
         <Button
           size="lg"

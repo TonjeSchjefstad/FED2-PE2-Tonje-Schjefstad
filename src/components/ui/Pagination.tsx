@@ -56,7 +56,7 @@ function Pagination({
         }`}
         aria-label="Previous page"
       >
-        <ChevronLeft size={16} />
+        <ChevronLeft size={16} aria-hidden="true" />
       </button>
 
       {/* First page + ellipsis */}
@@ -65,6 +65,7 @@ function Pagination({
           <button
             onClick={() => handlePageChange(1)}
             className={buttonClass(false)}
+            aria-label="Go to first page"
           >
             1
           </button>
@@ -78,6 +79,8 @@ function Pagination({
           key={page}
           onClick={() => handlePageChange(page)}
           className={buttonClass(page === currentPage)}
+          aria-label={`Go to page ${page}`}
+          aria-current={page === currentPage ? "page" : undefined}
         >
           {page}
         </button>
@@ -86,7 +89,9 @@ function Pagination({
       {/* Last page + ellipsis */}
       {currentPage < totalPages - 2 && totalPages > 3 && (
         <>
-          <span className="text-text-muted">...</span>
+          <span className="text-text-muted" aria-hidden="true">
+            ...
+          </span>
           <button
             onClick={() => handlePageChange(totalPages)}
             className={buttonClass(false)}
@@ -107,7 +112,7 @@ function Pagination({
         }`}
         aria-label="Next page"
       >
-        <ChevronRight size={16} />
+        <ChevronRight size={16} aria-hidden="true" />
       </button>
     </div>
   );

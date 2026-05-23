@@ -98,11 +98,15 @@ function EditProfile() {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           {/* Bio */}
           <div>
-            <label className="text-sm font-semibold text-text-primary mb-1 block">
+            <label
+              htmlFor="bio"
+              className="text-sm font-semibold text-text-primary mb-1 block"
+            >
               Bio
             </label>
             <textarea
               {...register("bio")}
+              id="bio"
               placeholder="Bio"
               rows={4}
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white resize-none"
@@ -114,11 +118,15 @@ function EditProfile() {
 
           {/* Avatar */}
           <div>
-            <label className="text-sm font-semibold text-text-primary mb-1 block">
+            <label
+              htmlFor="avatarUrl"
+              className="text-sm font-semibold text-text-primary mb-1 block"
+            >
               Avatar
             </label>
             <input
               {...register("avatarUrl")}
+              id="avatarUrl"
               placeholder="http://example.com/image1.jpg"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
             />
@@ -131,11 +139,15 @@ function EditProfile() {
 
           {/* Avatar alt text */}
           <div>
-            <label className="text-sm font-semibold text-text-primary mb-1 block">
+            <label
+              htmlFor="avatarAlt"
+              className="text-sm font-semibold text-text-primary mb-1 block"
+            >
               Avatar alt text
             </label>
             <input
               {...register("avatarAlt")}
+              id="avatarAlt"
               placeholder="A description of your avatar image"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
             />
@@ -146,10 +158,13 @@ function EditProfile() {
             <button
               type="button"
               onClick={() => setValue("venueManager", !venueManager)}
+              aria-label="Toggle Venue Manager"
+              aria-pressed={venueManager}
+              role="switch"
+              aria-checked={venueManager}
               className={`relative w-12 h-6 rounded-full transition-colors cursor-pointer shrink-0 mt-0.5 ${
                 venueManager ? "bg-button-primary" : "bg-border"
               }`}
-              aria-label="Toggle Venue Manager"
             >
               <span
                 className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${

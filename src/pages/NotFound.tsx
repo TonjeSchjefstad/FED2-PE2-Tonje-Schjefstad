@@ -6,7 +6,11 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
+    <div
+      className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center"
+      role="main"
+      aria-label="Page not found"
+    >
       <h1 className="text-8xl md:text-9xl font-bold text-brand-primary leading-none">
         404
       </h1>

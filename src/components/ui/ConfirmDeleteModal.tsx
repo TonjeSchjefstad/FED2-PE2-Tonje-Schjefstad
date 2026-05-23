@@ -23,9 +23,15 @@ function ConfirmDeleteModal({
     >
       <div
         className="bg-white rounded-xl p-8 w-full max-w-sm text-center"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirm delete"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-lg font-bold text-text-primary mb-2">
+        <h2
+          id="confirm delete"
+          className="text-lg font-bold text-text-primary mb-2"
+        >
           Are you sure?
         </h2>
         <p className="text-text-muted text-sm mb-6">{message}</p>

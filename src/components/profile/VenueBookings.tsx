@@ -66,7 +66,10 @@ function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
         <>
           {/* Desktop table */}
           <div className="hidden sm:block mb-8 overflow-x-auto">
-            <table className="w-full text-sm">
+            <table
+              className="w-full text-sm"
+              aria-label={`Upcoming bookings for ${venueName}`}
+            >
               <thead>
                 <tr className="border-b border-border text-left text-text-muted">
                   <th className="pb-3 font-semibold">Guest</th>
@@ -95,7 +98,10 @@ function VenueBookings({ venueId, venueName, onBack }: VenueBookingsProps) {
           </div>
 
           {/* Mobile table*/}
-          <div className="sm:hidden mb-8 space-y-0">
+          <div
+            className="sm:hidden mb-8 space-y-0"
+            aria-label={`Upcoming bookings for ${venueName}`}
+          >
             {upcoming.map((booking) => (
               <div key={booking.id} className="border-b border-border py-3">
                 <p className="text-text-primary text-sm font-semibold">

@@ -13,13 +13,17 @@ function Sorting({ value, onChange }: SortingProps) {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        aria-label="sort venues"
         className="appearance-none bg-white border border-border rounded-lg px-4 py-2 pr-10 text-sm text-text-primary outline-none focus:border-brand-primary accent-button-primary cursor-pointer "
       >
         <option value="recommended">Recommended</option>
         <option value="price_high">High to low</option>
         <option value="price_low">Low to high</option>
       </select>
-      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted">
+      <span
+        className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted"
+        aria-hidden="true"
+      >
         ▾
       </span>
     </div>

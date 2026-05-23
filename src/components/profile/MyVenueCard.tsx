@@ -41,7 +41,7 @@ function MyVenueCard({ venue, onDelete, onViewBookings }: MyVenueCardProps) {
             {venue.name}
           </Link>
           <div className="flex items-center gap-1 text-text-primary">
-            <Star size={14} fill="currentColor" />
+            <Star size={14} fill="currentColor" aria-hidden="true" />
             <span className="text-sm">{venue.rating}</span>
           </div>
         </div>
@@ -78,7 +78,7 @@ function MyVenueCard({ venue, onDelete, onViewBookings }: MyVenueCardProps) {
             className="text-red-400 hover:opacity-70 transition-opacity cursor-pointer ml-auto"
             aria-label="Delete venue"
           >
-            <Trash2 size={18} />
+            <Trash2 size={18} aria-hidden="true" />
           </button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { createVenue } from "../services/api";
 import {
@@ -20,7 +20,6 @@ import toast from "react-hot-toast";
 function CreateVenue() {
   const { user, token, apiKey } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) {
@@ -45,7 +44,6 @@ function CreateVenue() {
   const onSubmit = async (data: CreateVenueFormData) => {
     if (!token || !apiKey) return;
     try {
-      setError(null);
       const media = [data.image1, data.image2, data.image3]
         .filter(Boolean)
         .map((url) => ({ url: url!, alt: data.name }));
@@ -88,10 +86,6 @@ function CreateVenue() {
           Create venue
         </h1>
 
-        {error && (
-          <p className="text-error text-sm mb-4 text-center">{error}</p>
-        )}
-
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
           {/* Venue Details */}
           <div>
@@ -100,11 +94,15 @@ function CreateVenue() {
             </h2>
             <div className="flex flex-col gap-4">
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="name"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Venue name
                 </label>
                 <input
                   {...register("name")}
+                  id="name"
                   placeholder="Enter venue name"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -115,11 +113,15 @@ function CreateVenue() {
                 )}
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="description"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Description
                 </label>
                 <textarea
                   {...register("description")}
+                  id="description"
                   rows={4}
                   placeholder="Enter venue description"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white resize-none"
@@ -140,11 +142,15 @@ function CreateVenue() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="price"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Price/night ($)
                 </label>
                 <input
                   {...register("price", { valueAsNumber: true })}
+                  id="price"
                   type="number"
                   placeholder="100"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
@@ -156,11 +162,15 @@ function CreateVenue() {
                 )}
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="maxGuests"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Max guests
                 </label>
                 <input
                   {...register("maxGuests", { valueAsNumber: true })}
+                  id="maxGuests"
                   type="number"
                   placeholder="6"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
@@ -172,11 +182,15 @@ function CreateVenue() {
                 )}
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="rating"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Rating
                 </label>
                 <input
                   {...register("rating", { valueAsNumber: true })}
+                  id="rating"
                   type="number"
                   min={0}
                   max={5}
@@ -196,11 +210,13 @@ function CreateVenue() {
                 (key) => (
                   <label
                     key={key}
+                    htmlFor={key}
                     className="flex items-center gap-2 cursor-pointer text-sm text-text-primary capitalize"
                   >
                     <input
                       type="checkbox"
                       {...register(key)}
+                      id={key}
                       className="accent-button-primary cursor-pointer"
                     />
                     {key === "pets"
@@ -217,42 +233,58 @@ function CreateVenue() {
             <h2 className="font-semibold text-text-primary mb-4">Location</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="country"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Country
                 </label>
                 <input
                   {...register("country")}
+                  id="country"
                   placeholder="Norway"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="address"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Address
                 </label>
                 <input
                   {...register("address")}
+                  id="address"
                   placeholder="Sjøgata 1"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="zip"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Zip code
                 </label>
                 <input
                   {...register("zip")}
+                  id="zip"
                   placeholder="1001"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="city"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   City
                 </label>
                 <input
                   {...register("city")}
                   placeholder="Oslo"
+                  id="city"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -263,8 +295,17 @@ function CreateVenue() {
           <div>
             <h2 className="font-semibold text-text-primary mb-4">Images</h2>
             <div className="flex flex-col gap-3">
-              {(["image1", "image2", "image3"] as const).map((key) => (
+              {(["image1", "image2", "image3"] as const).map((key, index) => (
                 <div key={key}>
+                  <label
+                    htmlFor={key}
+                    className="text-sm text-text-primary mb-1 block"
+                  >
+                    {index === 0
+                      ? "Main image url"
+                      : `Additional image URL ${index}`}
+                  </label>
+
                   <input
                     {...register(key)}
                     placeholder="http://example.com/image1.jpg"

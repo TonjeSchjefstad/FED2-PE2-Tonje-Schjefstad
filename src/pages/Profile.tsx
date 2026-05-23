@@ -109,8 +109,11 @@ function ProfilePage() {
           <div className="bg-bg-card rounded-xl border border-border p-6">
             <div className="flex flex-col items-center text-center mb-6">
               <img
-                src={profile.avatar?.url || ""}
-                alt={profile.avatar?.alt || profile.name}
+                src={
+                  profile.avatar?.url ||
+                  "https://images.unsplash.com/photo-1529686159790-3246c5082afb?q=80&w=800"
+                }
+                alt={profile.avatar?.alt || `${profile.name}'s avatar`}
                 className="w-20 h-20 rounded-full object-cover bg-bg-secondary mb-3"
               />
               <h1 className="font-bold text-text-primary text-lg">
@@ -144,6 +147,7 @@ function ProfilePage() {
           <div className="p-4">
             {/* Mobile dropdown */}
             <select
+              aria-label="Select tab"
               className="w-full md:hidden border border-border rounded-lg px-4 py-2 text-sm text-text-primary outline-none focus:border-brand-primary bg-white cursor-pointer"
               value={activeTab}
               onChange={(e) => {
@@ -160,6 +164,8 @@ function ProfilePage() {
             {/* Desktop box tabs */}
             <div className="hidden md:flex gap-2">
               <button
+                role="tab"
+                aria-selected={activeTab === "bookings"}
                 onClick={() => {
                   setActiveTab("bookings");
                   setSelectedVenue(null);
@@ -170,11 +176,13 @@ function ProfilePage() {
                     : "text-text-muted hover:text-text-primary hover:bg-bg-secondary"
                 }`}
               >
-                <House size={16} />
+                <House size={16} aria-hidden="true" />
                 My bookings
               </button>
               {profile.venueManager && (
                 <button
+                  role="tab"
+                  aria-selected={activeTab === "venues"}
                   onClick={() => {
                     setActiveTab("venues");
                     setSelectedVenue(null);
@@ -185,7 +193,7 @@ function ProfilePage() {
                       : "text-text-muted hover:text-text-primary hover:bg-bg-secondary"
                   }`}
                 >
-                  <MapPin size={16} />
+                  <MapPin size={16} aria-hidden="true" />
                   My venues
                 </button>
               )}

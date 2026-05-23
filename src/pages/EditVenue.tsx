@@ -150,11 +150,15 @@ function EditVenue() {
             </h2>
             <div className="flex flex-col gap-4">
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="name"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Venue name
                 </label>
                 <input
                   {...register("name")}
+                  id="name"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
                 {errors.name && (
@@ -164,11 +168,15 @@ function EditVenue() {
                 )}
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="description"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Description
                 </label>
                 <textarea
                   {...register("description")}
+                  id="description"
                   rows={4}
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white resize-none"
                 />
@@ -188,11 +196,15 @@ function EditVenue() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="price"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Price/night ($)
                 </label>
                 <input
                   {...register("price", { valueAsNumber: true })}
+                  id="price"
                   type="number"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -203,11 +215,15 @@ function EditVenue() {
                 )}
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="maxGuests"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Max guests
                 </label>
                 <input
                   {...register("maxGuests", { valueAsNumber: true })}
+                  id="maxGuests"
                   type="number"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
@@ -218,11 +234,15 @@ function EditVenue() {
                 )}
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="rating"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Rating
                 </label>
                 <input
                   {...register("rating", { valueAsNumber: true })}
+                  id="rating"
                   type="number"
                   min={0}
                   max={5}
@@ -262,38 +282,54 @@ function EditVenue() {
             <h2 className="font-semibold text-text-primary mb-4">Location</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="country"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Country
                 </label>
                 <input
                   {...register("country")}
+                  id="country"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="address"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Address
                 </label>
                 <input
                   {...register("address")}
+                  id="address"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="city"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   City
                 </label>
                 <input
                   {...register("city")}
+                  id="city"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
               <div>
-                <label className="text-sm text-text-primary mb-1 block">
+                <label
+                  htmlFor="zip"
+                  className="text-sm text-text-primary mb-1 block"
+                >
                   Zip code
                 </label>
                 <input
                   {...register("zip")}
+                  id="zip"
                   className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
                 />
               </div>
@@ -306,8 +342,15 @@ function EditVenue() {
             <div className="flex flex-col gap-3">
               {(["image1", "image2", "image3"] as const).map((key, index) => (
                 <div key={key}>
+                  <label
+                    htmlFor={key}
+                    className="text-sm text-text-primary mb-1 block"
+                  >
+                    {index === 0 ? "Main image URL" : "Additional image URL"}
+                  </label>
                   <input
                     {...register(key)}
+                    id={key}
                     placeholder={
                       index === 0 ? "Main image URL" : "Additional image URL"
                     }

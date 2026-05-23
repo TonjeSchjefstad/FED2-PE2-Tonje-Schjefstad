@@ -29,7 +29,10 @@ function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 text-sm">
+          <nav
+            className="hidden md:flex items-center gap-8 text-sm"
+            aria-label="main navigation"
+          >
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -100,11 +103,15 @@ function Header() {
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
           onClick={() => setIsMenuOpen(false)}
+          aria-hidden="true"
         />
       )}
 
       {/* Mobile slide-out panel */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="navigation menu"
         className={`fixed top-0 right-0 h-full w-full bg-bg-primary z-50 transform transition-transform duration-300 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -150,7 +157,7 @@ function Header() {
           </div>
         )}
 
-        <nav className="flex flex-col px-6 py-2">
+        <nav className="flex flex-col px-6 py-2" aria-label="mobile navigation">
           <NavLink
             to="/"
             onClick={() => setIsMenuOpen(false)}

@@ -22,7 +22,7 @@ function Breadcrumbs({ items }: BreadcrumbsProps) {
     >
       {items.map((item, index) => (
         <div key={index} className="flex items-center gap-1">
-          {index > 0 && <ChevronRight size={14} />}
+          {index > 0 && <ChevronRight size={14} aria-hidden="true" />}
           {item.href ? (
             <Link
               to={item.href}
@@ -31,7 +31,10 @@ function Breadcrumbs({ items }: BreadcrumbsProps) {
               {item.label}
             </Link>
           ) : (
-            <span className="text-text-primary font-semibold">
+            <span
+              className="text-text-primary font-semibold"
+              aria-current="page"
+            >
               {item.label}
             </span>
           )}

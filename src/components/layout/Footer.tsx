@@ -34,7 +34,10 @@ function Footer() {
           <h3 className="font-semibold text-sm mb-4">Company</h3>
           <ul className="space-y-3 text-sm">
             <li>
-              <Link to="/" className="hover:text-bg-muted transition-colors">
+              <Link
+                to="/about"
+                className="hover:text-bg-muted transition-colors"
+              >
                 About us
               </Link>
             </li>
@@ -115,9 +118,21 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-6 border-t border-border flex flex-row items-center justify-between gap-4 text-sm">
         <span>@2026 Holidaze. All rights reserved.</span>
         <div className="flex gap-2 items-center">
-          <FaCcVisa size={35} className="text-text-secondary" />
-          <FaCcMastercard size={35} className="text-text-secondary" />
-          <FaCcPaypal size={35} className="text-text-secondary" />
+          <FaCcVisa
+            size={35}
+            className="text-text-secondary"
+            aria-label="visa"
+          />
+          <FaCcMastercard
+            size={35}
+            className="text-text-secondary"
+            aria-label="mastercard"
+          />
+          <FaCcPaypal
+            size={35}
+            className="text-text-secondary"
+            aria-label="paypal"
+          />
         </div>
       </div>
     </footer>

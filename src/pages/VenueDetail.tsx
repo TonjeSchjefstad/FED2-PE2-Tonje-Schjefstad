@@ -69,8 +69,11 @@ function VenueDetail() {
               {venue.name}
             </h1>
             <div className="flex items-center gap-1 text-text-primary">
-              <Star size={18} fill="currentColor" />
-              <span className="font-semibold">{venue.rating}</span>
+              <Star size={18} fill="currentColor" aria-hidden="true" />
+              <span className="font-semibold">
+                <span className="sr-only">Rating: </span>
+                {venue.rating}
+              </span>
             </div>
           </div>
 
@@ -101,28 +104,51 @@ function VenueDetail() {
             <ul className="space-y-3">
               {venue.meta.wifi && (
                 <li className="flex items-center gap-3 text-sm text-text-primary">
-                  <Wifi size={18} className="text-text-muted" /> WiFi
+                  <Wifi
+                    size={18}
+                    className="text-text-muted"
+                    aria-hidden="true"
+                  />{" "}
+                  WiFi
                 </li>
               )}
               {venue.meta.breakfast && (
                 <li className="flex items-center gap-3 text-sm text-text-primary">
-                  <Coffee size={18} className="text-text-muted" /> Breakfast
+                  <Coffee
+                    size={18}
+                    className="text-text-muted"
+                    aria-hidden="true"
+                  />{" "}
+                  Breakfast
                 </li>
               )}
               {venue.meta.parking && (
                 <li className="flex items-center gap-3 text-sm text-text-primary">
-                  <Car size={18} className="text-text-muted" /> Parking
+                  <Car
+                    size={18}
+                    className="text-text-muted"
+                    aria-hidden="true"
+                  />{" "}
+                  Parking
                 </li>
               )}
               {venue.meta.pets && (
                 <li className="flex items-center gap-3 text-sm text-text-primary">
-                  <PawPrint size={18} className="text-text-muted" /> Pets
-                  allowed
+                  <PawPrint
+                    size={18}
+                    className="text-text-muted"
+                    aria-hidden="true"
+                  />{" "}
+                  Pets allowed
                 </li>
               )}
               <li className="flex items-center gap-3 text-sm text-text-primary">
-                <Users size={18} className="text-text-muted" /> Max{" "}
-                {venue.maxGuests} guests
+                <Users
+                  size={18}
+                  className="text-text-muted"
+                  aria-hidden="true"
+                />{" "}
+                Max {venue.maxGuests} guests
               </li>
             </ul>
           </div>
@@ -141,7 +167,7 @@ function VenueDetail() {
       <div className="mt-8 w-full h-64 rounded-xl overflow-hidden">
         <img
           src={mapPlaceholder}
-          alt="Map placeholder"
+          alt="Map showing the location of the venue"
           className="w-full h-full object-cover"
         />
       </div>
@@ -150,8 +176,11 @@ function VenueDetail() {
       {venue.owner && (
         <div className="mt-8 flex items-center gap-3">
           <img
-            src={venue.owner.avatar?.url || ""}
-            alt={venue.owner.avatar?.alt || venue.owner.name}
+            src={
+              venue.owner.avatar?.url ||
+              "https://images.unsplash.com/photo-1529686159790-3246c5082afb?q=80&w=800"
+            }
+            alt={venue.owner.avatar?.alt || `${venue.owner.name}'s avatar`}
             className="w-10 h-10 rounded-full object-cover bg-bg-secondary"
           />
           <div>

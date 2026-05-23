@@ -41,9 +41,15 @@ function BookingConfirmModal({
     >
       <div
         className="bg-white rounded-xl p-12 w-full max-w-md"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="booking confirmation"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-2xl font-bold text-text-primary my-4">
+        <h2
+          id="modal-title"
+          className="text-2xl font-bold text-text-primary my-4"
+        >
           Confirm your booking
         </h2>
         <p className="text-text-muted text-sm mb-6">

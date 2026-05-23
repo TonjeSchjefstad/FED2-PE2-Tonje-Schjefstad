@@ -19,7 +19,7 @@ function About() {
 
       <img
         src="https://images.unsplash.com/photo-1475087542963-13ab5e611954?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Travel and adventure"
+        alt="Sunrise over a beautiful landscape, symbolizing new adventures"
         className="rounded-xl w-full h-80 object-cover mb-16"
       />
 

@@ -19,6 +19,7 @@ function VenueCard({ venue }: VenueCardProps) {
   return (
     <Link
       to={`/venues/${id}`}
+      aria-label={`View details for ${name}`}
       className="block bg-bg-card rounded-xl max-full overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
     >
       {/* Venue image */}
@@ -36,18 +37,18 @@ function VenueCard({ venue }: VenueCardProps) {
         <div className="flex items-center justify-between mb-1">
           <h3 className="font-bold text-text-primary text-lg">{name}</h3>
           <div className="flex items-center gap-1 text-text-primary">
-            <Star size={14} fill="currentColor" />
+            <Star size={14} fill="currentColor" aria-hidden="true" />
             <span className="text-sm">{rating}</span>
           </div>
         </div>
 
-        <p className="text-gray-500 text-sm mb-2">
+        <p className="text-text-muted text-sm mb-2">
           {location.city}, {location.country}
         </p>
 
         <p className="text-text-primary pt-2">
           <span className="font-semibold text-lg">${price}</span>
-          <span className="text-gray-500 text-sm"> / Night</span>
+          <span className="text-text-muted text-sm"> / Night</span>
         </p>
       </div>
     </Link>

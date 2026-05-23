@@ -37,6 +37,7 @@ function Button({
   return (
     <button
       disabled={disabled || isLoading}
+      aria-busy={isLoading}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >

@@ -116,6 +116,8 @@ function AvailabilityCalendar({
           type="button"
           onClick={() => handleDayClick(date)}
           disabled={booked || past}
+          aria-label={`${day} ${monthNames[month]} ${year}${booked ? ", unavailable" : ""}`}
+          aria-pressed={selected}
           className={`text-xs p-1 rounded text-center transition-colors cursor-pointer ${
             selected
               ? "bg-button-primary text-white"
@@ -138,7 +140,11 @@ function AvailabilityCalendar({
         </h3>
         <div className="grid grid-cols-7 gap-1 mb-2">
           {["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].map((d) => (
-            <div key={d} className="text-xs text-text-muted text-center">
+            <div
+              key={d}
+              role="columnheader"
+              className="text-xs text-text-muted text-center"
+            >
               {d}
             </div>
           ))}
@@ -177,6 +183,9 @@ function AvailabilityCalendar({
     >
       <div
         className="bg-white rounded-xl p-6 w-full max-w-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="availability calendar"
         onClick={(e) => e.stopPropagation()}
       >
         {/* 2 months side by side on desktop, 1 on mobile */}

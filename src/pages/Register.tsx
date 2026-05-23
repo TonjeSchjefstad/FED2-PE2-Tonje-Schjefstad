@@ -73,6 +73,7 @@ function Register() {
         <div className="flex rounded-lg overflow-hidden border border-border mb-4">
           <button
             type="button"
+            aria-pressed={accountType === "customer"}
             onClick={() => setAccountType("customer")}
             className={`flex-1 py-2 text-sm font-semibold transition-colors cursor-pointer ${
               accountType === "customer"
@@ -84,6 +85,7 @@ function Register() {
           </button>
           <button
             type="button"
+            aria-pressed={accountType === "venueManager"}
             onClick={() => setAccountType("venueManager")}
             className={`flex-1 py-2 text-sm font-semibold transition-colors cursor-pointer ${
               accountType === "venueManager"
@@ -112,8 +114,14 @@ function Register() {
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div>
-            <label className="text-sm text-text-primary mb-1 block">Name</label>
+            <label
+              htmlFor="name"
+              className="text-sm text-text-primary mb-1 block"
+            >
+              Name
+            </label>
             <input
+              id="name"
               {...register("name")}
               placeholder="Your name"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
@@ -124,10 +132,14 @@ function Register() {
           </div>
 
           <div>
-            <label className="text-sm text-text-primary mb-1 block">
+            <label
+              htmlFor="email"
+              className="text-sm text-text-primary mb-1 block"
+            >
               Email
             </label>
             <input
+              id="email"
               {...register("email")}
               placeholder="example@stud.noroff.no"
               className="w-full border border-border rounded-lg px-4 py-2 text-sm outline-none focus:border-brand-primary bg-white"
@@ -138,11 +150,15 @@ function Register() {
           </div>
 
           <div>
-            <label className="text-sm text-text-primary mb-1 block">
+            <label
+              htmlFor="password"
+              className="text-sm text-text-primary mb-1 block"
+            >
               Password
             </label>
             <div className="relative">
               <input
+                id="password"
                 {...register("password")}
                 type={showPassword ? "text" : "password"}
                 autoComplete="new-password"
@@ -155,7 +171,11 @@ function Register() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                {showPassword ? (
+                  <EyeOff size={16} aria-hidden="true" />
+                ) : (
+                  <Eye size={16} aria-hidden="true" />
+                )}
               </button>
             </div>
             {errors.password && (
@@ -166,11 +186,15 @@ function Register() {
           </div>
 
           <div>
-            <label className="text-sm text-text-primary mb-1 block">
+            <label
+              htmlFor="confirmPassword"
+              className="text-sm text-text-primary mb-1 block"
+            >
               Confirm password
             </label>
             <div className="relative">
               <input
+                id="confirmPassword"
                 {...register("confirmPassword")}
                 type={showConfirmPassword ? "text" : "password"}
                 autoComplete="new-password"

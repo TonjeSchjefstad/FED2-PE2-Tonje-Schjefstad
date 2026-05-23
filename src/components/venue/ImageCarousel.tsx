@@ -30,7 +30,11 @@ function ImageCarousel({ images, alt }: ImageCarouselProps) {
   }
 
   return (
-    <div className="relative w-full h-100 rounded-xl overflow-hidden mb-8">
+    <div
+      className="relative w-full h-100 rounded-xl overflow-hidden mb-8"
+      role="region"
+      aria-label="Venue images"
+    >
       <img
         src={images[currentImage].url}
         alt={images[currentImage].alt || alt}
@@ -69,10 +73,11 @@ function ImageCarousel({ images, alt }: ImageCarouselProps) {
               <button
                 key={index}
                 onClick={() => setCurrentImage(index)}
+                aria-label={`Go to image ${index + 1}`}
+                aria-current={index === currentImage ? "true" : undefined}
                 className={`w-2 h-2 rounded-full transition-colors cursor-pointer ${
                   index === currentImage ? "bg-white" : "bg-white/50"
                 }`}
-                aria-label={`Go to image ${index + 1}`}
               />
             ))}
           </div>

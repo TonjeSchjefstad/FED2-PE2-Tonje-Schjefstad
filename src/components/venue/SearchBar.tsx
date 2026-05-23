@@ -48,11 +48,16 @@ function SearchBar({ initialQuery = "", onSearch }: SearchBarProps) {
       <div className="bg-white rounded-xl p-4 flex flex-col md:flex-row gap-4 w-full shadow-md md:divide-y-0 md:divide-x divide-border">
         {/* Destinations field */}
         <div className="flex flex-col flex-1 px-4 py-2 md:py-0">
-          <span className="text-xs font-semibold text-text-primary mb-1 text-left">
+          <label
+            htmlFor="destination"
+            className="text-xs font-semibold text-text-primary mb-1 text-left"
+          >
             Destinations
-          </span>
+          </label>
           <div className="relative">
             <input
+              id="destination"
+              name="destination"
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -78,11 +83,15 @@ function SearchBar({ initialQuery = "", onSearch }: SearchBarProps) {
 
         {/* Date field */}
         <div className="flex flex-col flex-1 px-4 py-2 md:py-0">
-          <span className="text-xs font-semibold text-text-primary mb-1 text-left">
+          <label
+            htmlFor="dates"
+            className="text-xs font-semibold text-text-primary mb-1 text-left"
+          >
             Check In - Check Out
-          </span>
+          </label>
           <button
             type="button"
+            aria-label="Select check-in and check-out dates"
             onClick={() => setShowCalendar(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-sm text-text-placeholder hover:border-brand-primary transition-colors cursor-pointer bg-white"
           >
