@@ -83,12 +83,9 @@ function SearchBar({ initialQuery = "", onSearch }: SearchBarProps) {
 
         {/* Date field */}
         <div className="flex flex-col flex-1 px-4 py-2 md:py-0">
-          <label
-            htmlFor="dates"
-            className="text-xs font-semibold text-text-primary mb-1 text-left"
-          >
+          <span className="text-xs font-semibold text-text-primary mb-1 text-left">
             Check In - Check Out
-          </label>
+          </span>
           <button
             type="button"
             aria-label="Select check-in and check-out dates"
